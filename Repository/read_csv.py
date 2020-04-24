@@ -1,0 +1,31 @@
+import pandas as pd
+
+AIRLINES_CSV_PATH = 'D:/ViaUC/SEP6 - NYC Flights 13 - Documents/Data/airlines.csv'
+PLANES_CSV_PATH = 'D:/ViaUC/SEP6 - NYC Flights 13 - Documents/Data/planes.csv'
+
+
+def get_all_airlines():
+    airlines = pd.read_csv(AIRLINES_CSV_PATH, dtype={'carrier': pd.StringDtype(),
+                                                     'name': pd.StringDtype()})
+    df = replace_nan_with_none(airlines)
+    return df
+
+
+def get_all_planes():
+    planes = pd.read_csv(PLANES_CSV_PATH,
+                         dtype={'tailnum': pd.StringDtype(),
+                                'year': pd.Int64Dtype(),
+                                'type': pd.StringDtype(),
+                                'manufacturer': pd.StringDtype(),
+                                'model': pd.StringDtype(),
+                                'engines': pd.Int64Dtype(),
+                                'seats': pd.Int64Dtype(),
+                                'speed': pd.Int64Dtype(),
+                                'engine': pd.StringDtype(),
+                                })
+    df = replace_nan_with_none(planes)
+    return df
+
+
+def replace_nan_with_none(df):
+    return df.where(pd.notnull(df), None)
