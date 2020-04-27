@@ -1,34 +1,37 @@
+import os
 import grpc
 import time
 import logging
 
+from Controller.AirlinesController import add_airlines_controller_to_server
+from Repository.repository import Repository
 from concurrent import futures
 
-import Protos.greet_pb2_grpc as greet_pb2_grpc
-import Protos.greet_pb2 as greet_pb2
+DATABASE_CONNECTION_STRING = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:nycflights13.database.windows.net,1433;Database=nycflights13;Uid=nycflights;Pwd=flights13!;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
-
-with open('D:\Cert\server.key', 'rb') as f:
+with open(os.environ['PRIVATE_KEY_PATH'], 'rb') as f:
     private_key = f.read()
-with open('D:\Cert\server.crt', 'rb') as f:
+with open(os.environ['CERTIFICATE_PATH'], 'rb') as f:
     certificate_chain = f.read()
 
 
-class Greeter(greet_pb2_grpc.GreeterServicer):
-    def SayHello(self, request, context):
-        return greet_pb2.HelloReply(message='Hello, %s!' % request.name)
-
-
 def serve():
+    # Initialize Repository
+    repository = Repository(DATABASE_CONNECTION_STRING)
+
     server_credentials = grpc.ssl_server_credentials(
-        ((private_key, certificate_chain,),))
+        ((private_key, certificate_chain),),)
+
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    greet_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
-    server.add_secure_port('[::]:5001', server_credentials)
+
+    # Add AirlinesController To server
+    add_airlines_controller_to_server(server, repository)
+
+    server.add_secure_port('[::]:6001', server_credentials)
     server.start()
     try:
         while True:
-            time.sleep(86400)
+            time.sleep(1)
     except KeyboardInterrupt:
         server.stop(0)
 
