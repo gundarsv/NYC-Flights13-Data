@@ -25,3 +25,9 @@ class Repository:
         all_airlines = session.query(self.Airlines).all()
         session.close()
         return all_airlines
+
+    def get_all_planes(self):
+        session = Session(self.Engine)
+        all_planes = session.query(self.Planes).all()
+        session.close()
+        return all_planes

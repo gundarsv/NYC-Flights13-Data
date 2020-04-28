@@ -4,6 +4,7 @@ import time
 import logging
 
 from Controller.AirlinesController import add_airlines_controller_to_server
+from Controller.PlanesController import add_planes_controller_to_server
 from Repository.repository import Repository
 from concurrent import futures
 
@@ -26,6 +27,8 @@ def serve():
 
     # Add AirlinesController To server
     add_airlines_controller_to_server(server, repository)
+    add_planes_controller_to_server(server, repository)
+
 
     server.add_secure_port('[::]:6001', server_credentials)
     server.start()
