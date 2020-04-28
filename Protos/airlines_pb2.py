@@ -19,35 +19,11 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='nycflights',
   syntax='proto3',
   serialized_options=b'\252\002\014GrpcAirlines',
-  serialized_pb=b'\n\x0e\x61irlines.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"\x07\n\x05\x45mpty\"8\n\x0f\x41irlineResponse\x12%\n\x08\x61irlines\x18\x01 \x03(\x0b\x32\x13.nycflights.Airline\"(\n\x07\x41irline\x12\x0f\n\x07\x63\x61rrier\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t2N\n\x08\x41irlines\x12\x42\n\x0bGetAirlines\x12\x16.google.protobuf.Empty\x1a\x1b.nycflights.AirlineResponseB\x0f\xaa\x02\x0cGrpcAirlinesb\x06proto3'
+  serialized_pb=b'\n\x0e\x61irlines.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"8\n\x0f\x41irlineResponse\x12%\n\x08\x61irlines\x18\x01 \x03(\x0b\x32\x13.nycflights.Airline\"(\n\x07\x41irline\x12\x0f\n\x07\x63\x61rrier\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t2N\n\x08\x41irlines\x12\x42\n\x0bGetAirlines\x12\x16.google.protobuf.Empty\x1a\x1b.nycflights.AirlineResponseB\x0f\xaa\x02\x0cGrpcAirlinesb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
 
-
-
-_EMPTY = _descriptor.Descriptor(
-  name='Empty',
-  full_name='nycflights.Empty',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=59,
-  serialized_end=66,
-)
 
 
 _AIRLINERESPONSE = _descriptor.Descriptor(
@@ -76,8 +52,8 @@ _AIRLINERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=68,
-  serialized_end=124,
+  serialized_start=59,
+  serialized_end=115,
 )
 
 
@@ -114,22 +90,14 @@ _AIRLINE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=126,
-  serialized_end=166,
+  serialized_start=117,
+  serialized_end=157,
 )
 
 _AIRLINERESPONSE.fields_by_name['airlines'].message_type = _AIRLINE
-DESCRIPTOR.message_types_by_name['Empty'] = _EMPTY
 DESCRIPTOR.message_types_by_name['AirlineResponse'] = _AIRLINERESPONSE
 DESCRIPTOR.message_types_by_name['Airline'] = _AIRLINE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
-
-Empty = _reflection.GeneratedProtocolMessageType('Empty', (_message.Message,), {
-  'DESCRIPTOR' : _EMPTY,
-  '__module__' : 'airlines_pb2'
-  # @@protoc_insertion_point(class_scope:nycflights.Empty)
-  })
-_sym_db.RegisterMessage(Empty)
 
 AirlineResponse = _reflection.GeneratedProtocolMessageType('AirlineResponse', (_message.Message,), {
   'DESCRIPTOR' : _AIRLINERESPONSE,
@@ -154,8 +122,8 @@ _AIRLINES = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=168,
-  serialized_end=246,
+  serialized_start=159,
+  serialized_end=237,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetAirlines',
