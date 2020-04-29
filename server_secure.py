@@ -5,6 +5,7 @@ import logging
 
 from Controller.AirlinesController import add_airlines_controller_to_server
 from Controller.PlanesController import add_planes_controller_to_server
+from Controller.WeatherController import add_weather_controller_to_server
 from Repository.repository import Repository
 from concurrent import futures
 
