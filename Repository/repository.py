@@ -1,8 +1,6 @@
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from Repository.read_csv import get_all_weather
-from Repository.load_data import load_weather
 from urllib import parse
 
 
@@ -10,7 +8,7 @@ class Repository:
     Base = automap_base()
     Airlines = None
     Planes = None
-    Weather= None
+    Weather = None
     Flights = None
     Engine = None
 
@@ -22,7 +20,6 @@ class Repository:
         self.Planes = self.Base.classes.Planes
         self.Flights = self.Base.classes.Flights
         self.Weather = self.Base.classes.Weather
-        load_weather(get_all_weather(),self.Engine)
 
     def get_all_airlines(self):
         session = Session(self.Engine)
@@ -42,3 +39,5 @@ class Repository:
         session.close()
         return all_weather
 
+    def get_engine(self):
+        return self.Engine

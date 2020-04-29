@@ -2,9 +2,8 @@ import Protos.weather_pb2_grpc as weather_pb2_grpc
 import Protos.weather_pb2 as weather_pb2
 
 
-
 def add_weather_controller_to_server(server, repository):
-    weather_pb2_grpc.add_WeatherServicer_to_server(WeatherController(repository), server)
+    weather_pb2_grpc.add_WeathersServicer_to_server(WeatherController(repository), server)
 
 
 class WeatherController(weather_pb2_grpc.WeathersServicer):

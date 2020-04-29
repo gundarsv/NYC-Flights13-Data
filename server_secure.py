@@ -6,6 +6,8 @@ import logging
 from Controller.AirlinesController import add_airlines_controller_to_server
 from Controller.PlanesController import add_planes_controller_to_server
 from Controller.WeatherController import add_weather_controller_to_server
+from Repository.load_data import load_weather
+from Repository.read_csv import get_all_weather
 from Repository.repository import Repository
 from concurrent import futures
 
@@ -22,14 +24,16 @@ def serve():
     repository = Repository(DATABASE_CONNECTION_STRING)
 
     server_credentials = grpc.ssl_server_credentials(
-        ((private_key, certificate_chain),),)
+        ((private_key, certificate_chain),), )
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
     # Add AirlinesController To server
     add_airlines_controller_to_server(server, repository)
     add_planes_controller_to_server(server, repository)
+    add_weather_controller_to_server(server,  repository)
 
+    load_weather(get_all_weather(), repository.get_engine())
 
     server.add_secure_port('[::]:6001', server_credentials)
     server.start()
