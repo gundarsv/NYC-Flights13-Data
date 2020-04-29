@@ -5,7 +5,6 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 import Protos.weather_pb2 as weather__pb2
 
 
-
 class WeathersStub(object):
     """Missing associated documentation comment in .proto file"""
 
