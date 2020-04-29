@@ -24,7 +24,7 @@ def serve():
     repository = Repository(DATABASE_CONNECTION_STRING)
 
     server_credentials = grpc.ssl_server_credentials(
-        ((private_key, certificate_chain),), )
+        ((private_key, certificate_chain),),)
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
