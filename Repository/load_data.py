@@ -1,5 +1,5 @@
 from sqlalchemy.types import Integer, String, Float
-from pandas.api.types import is_string_dtype, is_int64_dtype, is_float_dtype
+from pandas.api.types import is_string_dtype, is_int64_dtype, is_float_dtype, is_object_dtype
 
 
 def load_airlines(all_airlines, engine):
@@ -18,6 +18,15 @@ def load_planes(all_planes, engine):
                       index=False)
 
 
+def load_weather(all_weather, engine):
+    print("Loading weather")
+    all_weather.to_sql('Weather',
+                       engine,
+                       if_exists='append',
+                       dtype=create_dtypes(all_weather),
+                       index=False)
+
+
 def create_dtypes(df):
     dtypes = {}
 
@@ -29,6 +38,9 @@ def create_dtypes(df):
             dtypes.update({'{}'.format(key): Integer})
 
         elif is_float_dtype(value):
+            dtypes.update({'{}'.format(key): Float})
+
+        elif is_object_dtype(value):
             dtypes.update({'{}'.format(key): Float})
 
     return dtypes

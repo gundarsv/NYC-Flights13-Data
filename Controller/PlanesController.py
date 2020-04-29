@@ -2,7 +2,6 @@ import Protos.planes_pb2_grpc as planes_pb2_grpc
 import Protos.planes_pb2 as planes_pb2
 
 
-
 def add_planes_controller_to_server(server, repository):
     planes_pb2_grpc.add_PlanesServicer_to_server(PlanesController(repository), server)
 

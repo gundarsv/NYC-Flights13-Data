@@ -2,6 +2,7 @@ import pandas as pd
 
 AIRLINES_CSV_PATH = 'D:/ViaUC/SEP6 - NYC Flights 13 - Documents/Data/airlines.csv'
 PLANES_CSV_PATH = 'D:/ViaUC/SEP6 - NYC Flights 13 - Documents/Data/planes.csv'
+WEATHER_CSV_PATH = 'D:/ViaUC/SEP6 - NYC Flights 13 - Documents/Data/weather.csv'
 
 
 def get_all_airlines():
@@ -24,6 +25,20 @@ def get_all_planes():
                                 'engine': pd.StringDtype(),
                                 })
     df = replace_nan_with_none(planes)
+    return df
+
+
+def get_all_weather():
+    weather = pd.read_csv(WEATHER_CSV_PATH,
+                          dtype={'origin': pd.StringDtype(),
+                                 'year': pd.Int64Dtype(),
+                                 'month': pd.Int64Dtype(),
+                                 'day': pd.Int64Dtype(),
+                                 'hour': pd.Int64Dtype(),
+                                 'wind_dir': pd.Int64Dtype(),
+                                 'time_hour': pd.StringDtype(),
+                                 })
+    df = replace_nan_with_none(weather)
     return df
 
 
