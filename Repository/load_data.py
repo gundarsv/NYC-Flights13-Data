@@ -3,7 +3,7 @@ from pandas.api.types import is_string_dtype, is_int64_dtype, is_float_dtype, is
 
 
 def load_airlines(all_airlines, engine):
-    all_airlines.to_sql('Airlines',
+    all_airlines.to_sql('airlines',
                         engine,
                         if_exists='append',
                         dtype=create_dtypes(all_airlines),
@@ -11,7 +11,7 @@ def load_airlines(all_airlines, engine):
 
 
 def load_planes(all_planes, engine):
-    all_planes.to_sql('Planes',
+    all_planes.to_sql('planes',
                       engine,
                       if_exists='append',
                       dtype=create_dtypes(all_planes),
@@ -19,8 +19,7 @@ def load_planes(all_planes, engine):
 
 
 def load_weather(all_weather, engine):
-    print("Loading weather")
-    all_weather.to_sql('Weather',
+    all_weather.to_sql('weather',
                        engine,
                        if_exists='append',
                        dtype=create_dtypes(all_weather),

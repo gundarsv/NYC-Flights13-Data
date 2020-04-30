@@ -1,4 +1,3 @@
-import os
 import grpc
 import time
 import logging
@@ -6,25 +5,17 @@ import logging
 from Controller.AirlinesController import add_airlines_controller_to_server
 from Controller.PlanesController import add_planes_controller_to_server
 from Controller.WeatherController import add_weather_controller_to_server
-from Repository.load_data import load_weather
-from Repository.read_csv import get_all_weather
+from Repository.load_data import load_weather, load_airlines, load_planes
+from Repository.read_csv import get_all_weather, get_all_airlines, get_all_planes
 from Repository.repository import Repository
 from concurrent import futures
 
-DATABASE_CONNECTION_STRING = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:nycflights13.database.windows.net,1433;Database=nycflights13;Uid=nycflights;Pwd=flights13!;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
-
-with open(os.environ['PRIVATE_KEY_PATH'], 'rb') as f:
-    private_key = f.read()
-with open(os.environ['CERTIFICATE_PATH'], 'rb') as f:
-    certificate_chain = f.read()
+DATABASE_CONNECTION_STRING = 'postgres+psycopg2://nycflightsadmin@nycflights-postgresql:flights13!@nycflights-postgresql.postgres.database.azure.com:5432/nycflights'
 
 
 def serve():
     # Initialize Repository
     repository = Repository(DATABASE_CONNECTION_STRING)
-
-    server_credentials = grpc.ssl_server_credentials(
-        ((private_key, certificate_chain),),)
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
@@ -33,9 +24,12 @@ def serve():
     add_planes_controller_to_server(server, repository)
     add_weather_controller_to_server(server,  repository)
 
-    load_weather(get_all_weather(), repository.get_engine())
+    engine = repository.get_engine()
 
-    server.add_secure_port('[::]:6001', server_credentials)
+    # load_planes(get_all_planes(), engine)
+    # load_airlines(get_all_airlines(), engine)
+
+    server.add_insecure_port('[::]:8080')
     server.start()
     try:
         while True:

@@ -1,7 +1,6 @@
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from urllib import parse
 
 
 class Repository:
@@ -13,13 +12,12 @@ class Repository:
     Engine = None
 
     def __init__(self, connection_string):
-        params = parse.quote_plus(connection_string)
-        self.Engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params, fast_executemany=True)
+        self.Engine = create_engine(connection_string)
         self.Base.prepare(self.Engine, reflect=True)
-        self.Airlines = self.Base.classes.Airlines
-        self.Planes = self.Base.classes.Planes
-        self.Flights = self.Base.classes.Flights
-        self.Weather = self.Base.classes.Weather
+        self.Airlines = self.Base.classes.airlines
+        self.Planes = self.Base.classes.planes
+        self.Flights = self.Base.classes.flights
+        self.Weather = self.Base.classes.weather
 
     def get_all_airlines(self):
         session = Session(self.Engine)
