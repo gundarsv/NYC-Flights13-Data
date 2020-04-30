@@ -335,4 +335,5 @@ dmypy.json
 cython_debug/
 
 /venv/
-/venv/Scripts/
+/venv/*
+venv/*
