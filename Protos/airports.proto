@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcWeather";
+
+import "google/protobuf/empty.proto";
+
+package nycflights;
+
+service Airports {
+	rpc GetAirports (google.protobuf.Empty) returns (AirportResponse);
+}
+
+message AirportResponse {
+	repeated Airport airport = 1;
+}
+
+message Airport {
+    string faa = 1;
+    string name = 2;
+    float lat = 3;
+    float lon = 4;
+    int32 alt =5;
+    int32 tz = 6;
+    string dst = 7;
+    string tzone = 8;
+}
