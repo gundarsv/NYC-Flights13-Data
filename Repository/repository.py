@@ -1,5 +1,5 @@
 from sqlalchemy.ext.automap import automap_base
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func
 from sqlalchemy.orm import Session
 
 
@@ -9,6 +9,7 @@ class Repository:
     Planes = None
     Weather = None
     Flights = None
+    Airports = None
     Engine = None
 
     def __init__(self, connection_string):
@@ -18,6 +19,7 @@ class Repository:
         self.Planes = self.Base.classes.planes
         self.Flights = self.Base.classes.flights
         self.Weather = self.Base.classes.weather
+        self.Airports = self.Base.classes.airports
 
     def get_all_airlines(self):
         session = Session(self.Engine)
@@ -36,6 +38,24 @@ class Repository:
         all_weather = session.query(self.Weather).all()
         session.close()
         return all_weather
+
+    def get_all_airports(self):
+        session = Session(self.Engine)
+        all_airports = session.query(self.Airports).all()
+        session.close()
+        return all_airports
+
+    def get_all_flights(self):
+        session = Session(self.Engine)
+        all_flights = session.query(self.Flights).all()
+        session.close()
+        return all_flights
+
+    def get_number_of_flights_per_month(self, month_number):
+        session = Session(self.Engine)
+        number_of_flights = session.query(func.count(self.Flights.day)).filter(self.Flights.month == month_number).scalar()
+        session.close()
+        return number_of_flights
 
     def get_engine(self):
         return self.Engine

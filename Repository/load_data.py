@@ -7,7 +7,9 @@ def load_airlines(all_airlines, engine):
                         engine,
                         if_exists='append',
                         dtype=create_dtypes(all_airlines),
-                        index=False)
+                        index=False,
+                        method='multi',
+                        chunksize=50)
 
 
 def load_planes(all_planes, engine):
@@ -15,7 +17,9 @@ def load_planes(all_planes, engine):
                       engine,
                       if_exists='append',
                       dtype=create_dtypes(all_planes),
-                      index=False)
+                      index=False,
+                      method='multi',
+                      chunksize=50)
 
 
 def load_weather(all_weather, engine):
@@ -23,7 +27,29 @@ def load_weather(all_weather, engine):
                        engine,
                        if_exists='append',
                        dtype=create_dtypes(all_weather),
-                       index=False)
+                       index=False,
+                       method='multi',
+                       chunksize=50)
+
+
+def load_airports(all_airports, engine):
+    all_airports.to_sql('airports',
+                        engine,
+                        if_exists='append',
+                        dtype=create_dtypes(all_airports),
+                        index=False,
+                        method='multi',
+                        chunksize=50)
+
+
+def load_flights(all_flights, engine):
+    all_flights.to_sql('flights',
+                       engine,
+                       if_exists='append',
+                       dtype=create_dtypes(all_flights),
+                       index=False,
+                       method='multi',
+                       chunksize=50)
 
 
 def create_dtypes(df):
