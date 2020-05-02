@@ -1,32 +1,38 @@
 import grpc
 import time
 import logging
-
-from grpc._cython import cygrpc
+import os
 
 from Controller.AirlinesController import add_airlines_controller_to_server
 from Controller.PlanesController import add_planes_controller_to_server
 from Controller.WeatherController import add_weather_controller_to_server
 from Controller.AirportsController import add_airports_controller_to_server
 from Controller.FlightsController import add_flights_controller_to_server
-from Repository.load_data import load_weather, load_airlines, load_planes, load_airports, load_flights
-from Repository.read_csv import get_all_weather, get_all_airlines, get_all_planes, get_all_airports, get_all_flights
 from Repository.repository import Repository
 from concurrent import futures
 
-DATABASE_CONNECTION_STRING = 'postgres+psycopg2://nycflightsadmin@nycflights-postgresql:flights13!@nycflights-postgresql.postgres.database.azure.com:5432/nycflights'
+DATABASE_USERNAME = os.environ['DATABASE_USERNAME']
+DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
+DATABASE_SERVER = os.environ['DATABASE_SERVER']
+DATABASE_PORT = os.environ['DATABASE_PORT']
+DATABASE_NAME = os.environ['DATABASE_NAME']
 
 
 def serve():
+    connection_string = 'postgres+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(DATABASE_USERNAME,
+                                                                         DATABASE_PASSWORD,
+                                                                         DATABASE_SERVER,
+                                                                         DATABASE_PORT,
+                                                                         DATABASE_NAME)
+
     # Initialize Repository
-    repository = Repository(DATABASE_CONNECTION_STRING)
+    repository = Repository(connection_string)
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10), options=[
         ('grpc.max_send_message_length', -1),
         ('grpc.max_receive_message_length', -1),
     ])
 
-    # Add AirlinesController To server
     add_airlines_controller_to_server(server, repository)
     add_planes_controller_to_server(server, repository)
     add_weather_controller_to_server(server,  repository)
@@ -41,7 +47,8 @@ def serve():
     # load_weather(get_all_weather(), engine)
     # load_flights(get_all_flights(), engine)
 
-    server.add_insecure_port('[::]:8080')
+    print("Server running on port 80")
+    server.add_insecure_port('[::]:80')
     server.start()
     try:
         while True:
