@@ -20,11 +20,11 @@ DATABASE_NAME = os.environ['DATABASE_NAME']
 
 
 def serve():
-    connection_string = 'postgres+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(DATABASE_USERNAME,
-                                                                         DATABASE_PASSWORD,
-                                                                         DATABASE_SERVER,
-                                                                         DATABASE_PORT,
-                                                                         DATABASE_NAME)
+    # connection_string = 'postgres+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(DATABASE_USERNAME,
+    #                                                                      DATABASE_PASSWORD,
+    #                                                                      DATABASE_SERVER,
+    #                                                                      DATABASE_PORT,
+    #                                                                      DATABASE_NAME)
 
     # Initialize Repository
     repository = Repository(connection_string)
