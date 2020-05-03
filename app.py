@@ -2,6 +2,7 @@ import grpc
 import time
 import logging
 import os
+import sys
 
 from Controller.AirlinesController import add_airlines_controller_to_server
 from Controller.PlanesController import add_planes_controller_to_server
@@ -35,7 +36,7 @@ def serve():
 
     add_airlines_controller_to_server(server, repository)
     add_planes_controller_to_server(server, repository)
-    add_weather_controller_to_server(server,  repository)
+    add_weather_controller_to_server(server, repository)
     add_airports_controller_to_server(server, repository)
     add_flights_controller_to_server(server, repository)
 
@@ -50,11 +51,15 @@ def serve():
     print("Server running on port 80")
     server.add_insecure_port('[::]:80')
     server.start()
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        server.stop(0)
+
+    if len(sys.argv) > 1:
+        print("Test Completed Successfully")
+    else:
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            server.stop(0)
 
 
 if __name__ == '__main__':
