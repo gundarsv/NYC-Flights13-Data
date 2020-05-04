@@ -15,11 +15,11 @@ class Repository:
     def __init__(self, connection_string):
         self.Engine = create_engine(connection_string)
         self.Base.prepare(self.Engine, reflect=True)
-        self.Airlines = self.Base.classes.airlines
         self.Planes = self.Base.classes.planes
         self.Flights = self.Base.classes.flights
         self.Weather = self.Base.classes.weather
         self.Airports = self.Base.classes.airports
+        self.Airlines = self.Base.classes.airlines
 
     def get_all_airlines(self):
         session = Session(self.Engine)
@@ -53,9 +53,31 @@ class Repository:
 
     def get_number_of_flights_per_month(self, month_number):
         session = Session(self.Engine)
-        number_of_flights = session.query(func.count(self.Flights.day)).filter(self.Flights.month == month_number).scalar()
+        number_of_flights = session.query(func.count('*').label('count'), self.Flights.month.label('month'))\
+            .filter(self.Flights.month == month_number)\
+            .group_by(self.Flights.month).one()
+
         session.close()
         return number_of_flights
+
+    def get_number_of_flights_in_months(self, month_numbers):
+        session = Session(self.Engine)
+        number_of_flights = session.query(func.count('*').label('count'), self.Flights.month.label('month'))\
+            .filter(self.Flights.month.in_(month_numbers))\
+            .group_by(self.Flights.month).all()
+
+        session.close()
+        return number_of_flights
+
+    def get_manufacturers_with_more_than_200_planes(self):
+        session = Session(self.Engine)
+        manufacturers_with_more_than_200_planes = session.query(func.count('*').label('planesTotal'), self.Planes.manufacturer.label('manufacturer'))\
+            .having(func.count('*') >= 200)\
+            .group_by(self.Planes.manufacturer).all()
+
+        session.close()
+        return manufacturers_with_more_than_200_planes;
+
 
     def get_engine(self):
         return self.Engine

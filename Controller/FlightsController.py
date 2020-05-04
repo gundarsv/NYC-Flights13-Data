@@ -21,4 +21,21 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
 
     def GetNumberOfFlightsPerMonth(self, request, context):
         number_of_flights = self.repository.get_number_of_flights_per_month(request.number)
-        return flights_pb2.FlightsCount(count=number_of_flights)
+        return flights_pb2.FlightsPerMonth(monthNumber=flights_pb2.MonthNumber(number=number_of_flights.month), flightsCount=number_of_flights.count)
+
+    def GetNumberOfFlightsInMonths(self, request, context):
+        numbers = []
+
+        for data in request.monthNumbers:
+            numbers.append(data.number)
+
+        number_of_flights_in_months = self.repository.get_number_of_flights_in_months(month_numbers=numbers)
+
+        print(self.repository.get_manufacturers_with_more_than_200_planes())
+
+        grpc_number_of_flights_in_month = []
+
+        for data in number_of_flights_in_months:
+            grpc_number_of_flights_in_month.append(flights_pb2.FlightsPerMonth(monthNumber=flights_pb2.MonthNumber(number=data.month), flightsCount=data.count))
+
+        return flights_pb2.FlightsInMonths(flightsPerMonth=grpc_number_of_flights_in_month)
