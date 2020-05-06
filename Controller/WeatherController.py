@@ -18,3 +18,12 @@ class WeatherController(weather_pb2_grpc.WeathersServicer):
         for data in all_weather:
             grpc_weather.append(weather_pb2.Weather(origin=data.origin, year=data.year, month=data.month, day=data.day, hour=data.hour, temp=data.temp, dewp=data.dewp, humid=data.humid, wind_dir=data.wind_dir, wind_speed=data.wind_speed, wind_gust=data.wind_gust, precip=data.precip, pressure=data.pressure, visib=data.visib, time_hour=data.time_hour))
         return weather_pb2.WeatherResponse(weather=grpc_weather)
+
+    def GetTemperatureAtOrigin(self, request, context):
+        all_temperature_at_origin = self.repository.get_temperature_at_origin(request.origin)
+        grpc_temperature_at_origins = []
+        for data in all_temperature_at_origin:
+            grpc_temperature_at_origins.append(weather_pb2.TemperatureAtOrigin(year=data.year, month=data.month, day=data.day, hour=data.hour, temp=data.temp))
+
+        return weather_pb2.TemperatureResponse(temperatureAtOrigins=grpc_temperature_at_origins)
+

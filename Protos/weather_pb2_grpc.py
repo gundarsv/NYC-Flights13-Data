@@ -19,12 +19,23 @@ class WeathersStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=weather__pb2.WeatherResponse.FromString,
                 )
+        self.GetTemperatureAtOrigin = channel.unary_unary(
+                '/nycflights.Weathers/GetTemperatureAtOrigin',
+                request_serializer=weather__pb2.TemperatureRequest.SerializeToString,
+                response_deserializer=weather__pb2.TemperatureResponse.FromString,
+                )
 
 
 class WeathersServicer(object):
     """Missing associated documentation comment in .proto file"""
 
     def GetWeather(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetTemperatureAtOrigin(self, request, context):
         """Missing associated documentation comment in .proto file"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_WeathersServicer_to_server(servicer, server):
                     servicer.GetWeather,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=weather__pb2.WeatherResponse.SerializeToString,
+            ),
+            'GetTemperatureAtOrigin': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTemperatureAtOrigin,
+                    request_deserializer=weather__pb2.TemperatureRequest.FromString,
+                    response_serializer=weather__pb2.TemperatureResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -61,5 +77,21 @@ class Weathers(object):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Weathers/GetWeather',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             weather__pb2.WeatherResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetTemperatureAtOrigin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Weathers/GetTemperatureAtOrigin',
+            weather__pb2.TemperatureRequest.SerializeToString,
+            weather__pb2.TemperatureResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
