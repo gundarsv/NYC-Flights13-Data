@@ -31,11 +31,18 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
 
         number_of_flights_in_months = self.repository.get_number_of_flights_in_months(month_numbers=numbers)
 
-        print(self.repository.get_manufacturers_with_more_than_200_planes())
-
         grpc_number_of_flights_in_month = []
 
         for data in number_of_flights_in_months:
             grpc_number_of_flights_in_month.append(flights_pb2.FlightsPerMonth(monthNumber=flights_pb2.MonthNumber(number=data.month), flightsCount=data.count))
 
         return flights_pb2.FlightsInMonths(flightsPerMonth=grpc_number_of_flights_in_month)
+
+    def GetTop10DestinationsForOrigin(self, request, context):
+        number_of_flights_per_destination_at_origin = self.repository.get_top_10_destinations_for_origin(request.origin)
+        grpc_number_of_flights_per_destination_at_origin = []
+
+        for data in number_of_flights_per_destination_at_origin:
+            grpc_number_of_flights_per_destination_at_origin.append(flights_pb2.FlightsPerDestination(numberOfFlights=data.numberOfFlights, destination=data.destination, origin=data.origin))
+
+        return flights_pb2.DestinationResponse(flightsPerDestination=grpc_number_of_flights_per_destination_at_origin)

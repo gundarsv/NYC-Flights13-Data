@@ -78,11 +78,26 @@ class Repository:
         session.close()
         return manufacturers_with_more_than_200_planes;
 
-    def get_temperature_at_origin(self,origin):
-        session= Session(self.Engine)
-        temperatures_at_origin = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp).filter(self.Weather.origin==origin).all()
+    def get_temperature_at_origin(self, origin):
+        session = Session(self.Engine)
+        temperatures_at_origin = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp)\
+            .filter(self.Weather.origin == origin)\
+            .all()
+
         session.close()
-        return temperatures_at_origin;
+        return temperatures_at_origin
+
+    def get_top_10_destinations_for_origin(self, origin):
+        session = Session(self.Engine)
+        top_10_destinations_for_origin = session.query(func.count('*').label('numberOfFlights'), self.Flights.dest.label('destination'), self.Flights.origin)\
+            .filter(self.Flights.origin == origin)\
+            .group_by(self.Flights.dest, self.Flights.origin)\
+            .order_by(func.count('*').desc())\
+            .limit(10)\
+            .all()
+
+        session.close()
+        return top_10_destinations_for_origin
 
     def get_engine(self):
         return self.Engine
