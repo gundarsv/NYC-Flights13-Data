@@ -29,6 +29,11 @@ class FlightsStub(object):
                 request_serializer=Protos_dot_flights__pb2.AllMonths.SerializeToString,
                 response_deserializer=Protos_dot_flights__pb2.FlightsInMonths.FromString,
                 )
+        self.GetTop10DestinationsForOrigin = channel.unary_unary(
+                '/nycflights.Flights/GetTop10DestinationsForOrigin',
+                request_serializer=Protos_dot_flights__pb2.DestinationRequest.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.DestinationResponse.FromString,
+                )
 
 
 class FlightsServicer(object):
@@ -52,6 +57,12 @@ class FlightsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetTop10DestinationsForOrigin(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_FlightsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -69,6 +80,11 @@ def add_FlightsServicer_to_server(servicer, server):
                     servicer.GetNumberOfFlightsInMonths,
                     request_deserializer=Protos_dot_flights__pb2.AllMonths.FromString,
                     response_serializer=Protos_dot_flights__pb2.FlightsInMonths.SerializeToString,
+            ),
+            'GetTop10DestinationsForOrigin': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTop10DestinationsForOrigin,
+                    request_deserializer=Protos_dot_flights__pb2.DestinationRequest.FromString,
+                    response_serializer=Protos_dot_flights__pb2.DestinationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -125,5 +141,21 @@ class Flights(object):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsInMonths',
             Protos_dot_flights__pb2.AllMonths.SerializeToString,
             Protos_dot_flights__pb2.FlightsInMonths.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetTop10DestinationsForOrigin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetTop10DestinationsForOrigin',
+            Protos_dot_flights__pb2.DestinationRequest.SerializeToString,
+            Protos_dot_flights__pb2.DestinationResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
