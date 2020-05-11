@@ -46,3 +46,11 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
             grpc_number_of_flights_per_destination_at_origin.append(flights_pb2.FlightsPerDestination(numberOfFlights=data.numberOfFlights, destination=data.destination, origin=data.origin))
 
         return flights_pb2.DestinationResponse(flightsPerDestination=grpc_number_of_flights_per_destination_at_origin)
+
+    def GetAirtimeAtOrigin(self, request, context):
+        all_airtime_at_origin = self.repository.get_airtime_at_origin(request.origin)
+        grpc_airtime_at_origin = []
+        for data in all_airtime_at_origin:
+             grpc_airtime_at_origin.append(flights_pb2.AirtimeAtOrigin(air_time=data.air_time))
+
+        return flights_pb2.AirtimeResponse(airtimeAtOrigin=grpc_airtime_at_origin)

@@ -99,5 +99,14 @@ class Repository:
         session.close()
         return top_10_destinations_for_origin
 
+    def get_airtime_at_origin(self, origin):
+        session= Session(self.Engine)
+        airtime_at_origin= session.query(self.Flights.air_time)\
+            .filter(self.Flights.origin == origin)\
+            .all()
+
+        session.close()
+        return airtime_at_origin;
+
     def get_engine(self):
         return self.Engine
