@@ -100,13 +100,23 @@ class Repository:
         return top_10_destinations_for_origin
 
     def get_airtime_at_origin(self, origin):
-        session= Session(self.Engine)
-        airtime_at_origin= session.query(self.Flights.air_time)\
+        session = Session(self.Engine)
+        airtime_at_origin = session.query(self.Flights.air_time)\
             .filter(self.Flights.origin == origin)\
             .all()
 
         session.close()
         return airtime_at_origin;
+
+    def get_weather_observations_at_origin(self, origin):
+        session = Session(self.Engine)
+        observations_at_origin = session.query(func.count('*').label('observationsAtOrigin'), self.Weather.origin) \
+            .filter(self.Weather.origin == origin) \
+            .group_by(self.Weather.origin)\
+            .one()
+
+        session.close()
+        return observations_at_origin
 
     def get_engine(self):
         return self.Engine
