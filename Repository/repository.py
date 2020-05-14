@@ -118,5 +118,16 @@ class Repository:
         session.close()
         return observations_at_origin
 
+    def get_temperature_at_origins(self, origins):
+        session = Session(self.Engine)
+        temperatures_at_origins = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp, self.Weather.origin)\
+            .filter(self.Weather.origin.in_(origins))\
+            .group_by(self.Weather.origin, self.Weather.temp, self.Weather.day, self.Weather.month, self.Weather.year,self.Weather.hour)\
+            .order_by(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour)\
+            .all()
+
+        session.close()
+        return temperatures_at_origins
+
     def get_engine(self):
         return self.Engine
