@@ -39,6 +39,11 @@ class FlightsStub(object):
                 request_serializer=Protos_dot_flights__pb2.AirtimeRequest.SerializeToString,
                 response_deserializer=Protos_dot_flights__pb2.AirtimeAtOrigin.FromString,
                 )
+        self.GetAirtimeAtOrigins = channel.unary_unary(
+                '/nycflights.Flights/GetAirtimeAtOrigins',
+                request_serializer=Protos_dot_flights__pb2.AirtimeRequests.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.AirtimeAtOrigins.FromString,
+                )
 
 
 class FlightsServicer(object):
@@ -74,6 +79,12 @@ class FlightsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAirtimeAtOrigins(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_FlightsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -101,6 +112,11 @@ def add_FlightsServicer_to_server(servicer, server):
                     servicer.GetAirtimeAtOrigin,
                     request_deserializer=Protos_dot_flights__pb2.AirtimeRequest.FromString,
                     response_serializer=Protos_dot_flights__pb2.AirtimeAtOrigin.SerializeToString,
+            ),
+            'GetAirtimeAtOrigins': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAirtimeAtOrigins,
+                    request_deserializer=Protos_dot_flights__pb2.AirtimeRequests.FromString,
+                    response_serializer=Protos_dot_flights__pb2.AirtimeAtOrigins.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -189,5 +205,21 @@ class Flights(object):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetAirtimeAtOrigin',
             Protos_dot_flights__pb2.AirtimeRequest.SerializeToString,
             Protos_dot_flights__pb2.AirtimeAtOrigin.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAirtimeAtOrigins(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetAirtimeAtOrigins',
+            Protos_dot_flights__pb2.AirtimeRequests.SerializeToString,
+            Protos_dot_flights__pb2.AirtimeAtOrigins.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
