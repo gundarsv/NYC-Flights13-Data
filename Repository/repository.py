@@ -81,7 +81,7 @@ class Repository:
 
     def get_temperature_at_origin(self, origin):
         session = Session(self.Engine)
-        temperatures_at_origin = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp)\
+        temperatures_at_origin = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp, self.Weather.origin)\
             .filter(self.Weather.origin == origin)\
             .all()
 
@@ -143,7 +143,7 @@ class Repository:
         session = Session(self.Engine)
         temperatures_at_origins = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp, self.Weather.origin)\
             .filter(self.Weather.origin.in_(origins))\
-            .group_by(self.Weather.origin, self.Weather.temp, self.Weather.day, self.Weather.month, self.Weather.year,self.Weather.hour)\
+            .group_by(self.Weather.origin, self.Weather.temp, self.Weather.day, self.Weather.month, self.Weather.year,self.Weather.hour, self.Weather.origin)\
             .order_by(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour)\
             .all()
 
