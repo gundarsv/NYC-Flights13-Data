@@ -1,5 +1,6 @@
 import Protos.flights_pb2_grpc as flights_pb2_grpc
 import Protos.flights_pb2 as flights_pb2
+import pandas as pd
 
 
 def add_flights_controller_to_server(server, repository):
@@ -49,8 +50,5 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
 
     def GetAirtimeAtOrigin(self, request, context):
         all_airtime_at_origin = self.repository.get_airtime_at_origin(request.origin)
-        grpc_airtime_at_origin = []
-        for data in all_airtime_at_origin:
-             grpc_airtime_at_origin.append(flights_pb2.AirtimeAtOrigin(air_time=data.air_time))
 
-        return flights_pb2.AirtimeResponse(airtimeAtOrigin=grpc_airtime_at_origin)
+        return flights_pb2.AirtimeAtOrigin(air_time=pd.DataFrame(all_airtime_at_origin).mean(), origin=request.origin)
