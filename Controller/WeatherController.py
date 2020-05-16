@@ -75,3 +75,19 @@ class WeatherController(weather_pb2_grpc.WeathersServicer):
 
         return weather_pb2.DailyMeanTemperatureResponse(dailyMeanTemperatures=grpc_temperature_data_with_daily_mean)
 
+    def GetDailyMeanTemperatureAtOrigins(self, request, context):
+        origins = []
+
+        for data in request.origins:
+            origins.append(data.origin)
+
+        all_temperature_data_at_origin = self.repository.get_temperature_at_origins(origins)
+
+        grpc_temperature_data_with_daily_mean = []
+
+        for _, data in get_daily_mean_temperature(all_temperature_data_at_origin).iterrows():
+            grpc_temperature_data_with_daily_mean.append(
+                weather_pb2.DailyMeanTemperature(year=int(data.year), month=int(data.month), day=int(data.day),
+                                                 meanTemp=data.mean_temperature, origin=data.origin))
+
+        return weather_pb2.DailyMeanTemperatureResponse(dailyMeanTemperatures=grpc_temperature_data_with_daily_mean)

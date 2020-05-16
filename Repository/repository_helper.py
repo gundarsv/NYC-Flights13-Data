@@ -2,6 +2,7 @@ import pandas as pd
 
 
 def get_daily_mean_temperature(temperature):
+    print(pd.DataFrame(temperature).groupby(['year', 'month', 'day', 'origin'])['temp'].mean())
     return pd.DataFrame(temperature).groupby(['year', 'month', 'day', 'origin'])['temp'].mean().reset_index(name='mean_temperature')
 
 
