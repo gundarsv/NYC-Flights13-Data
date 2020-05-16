@@ -44,6 +44,11 @@ class WeathersStub(object):
                 request_serializer=Protos_dot_weather__pb2.OriginRequest.SerializeToString,
                 response_deserializer=Protos_dot_weather__pb2.DailyMeanTemperatureResponse.FromString,
                 )
+        self.GetDailyMeanTemperatureAtOrigins = channel.unary_unary(
+                '/nycflights.Weathers/GetDailyMeanTemperatureAtOrigins',
+                request_serializer=Protos_dot_weather__pb2.OriginsRequest.SerializeToString,
+                response_deserializer=Protos_dot_weather__pb2.DailyMeanTemperatureResponse.FromString,
+                )
 
 
 class WeathersServicer(object):
@@ -85,6 +90,12 @@ class WeathersServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetDailyMeanTemperatureAtOrigins(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_WeathersServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -116,6 +127,11 @@ def add_WeathersServicer_to_server(servicer, server):
             'GetDailyMeanTemperatureAtOrigin': grpc.unary_unary_rpc_method_handler(
                     servicer.GetDailyMeanTemperatureAtOrigin,
                     request_deserializer=Protos_dot_weather__pb2.OriginRequest.FromString,
+                    response_serializer=Protos_dot_weather__pb2.DailyMeanTemperatureResponse.SerializeToString,
+            ),
+            'GetDailyMeanTemperatureAtOrigins': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDailyMeanTemperatureAtOrigins,
+                    request_deserializer=Protos_dot_weather__pb2.OriginsRequest.FromString,
                     response_serializer=Protos_dot_weather__pb2.DailyMeanTemperatureResponse.SerializeToString,
             ),
     }
@@ -220,6 +236,22 @@ class Weathers(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Weathers/GetDailyMeanTemperatureAtOrigin',
             Protos_dot_weather__pb2.OriginRequest.SerializeToString,
+            Protos_dot_weather__pb2.DailyMeanTemperatureResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDailyMeanTemperatureAtOrigins(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Weathers/GetDailyMeanTemperatureAtOrigins',
+            Protos_dot_weather__pb2.OriginsRequest.SerializeToString,
             Protos_dot_weather__pb2.DailyMeanTemperatureResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
