@@ -1,5 +1,6 @@
 import Protos.weather_pb2_grpc as weather_pb2_grpc
 import Protos.weather_pb2 as weather_pb2
+from Repository.repository_helper import get_daily_mean_temperature
 
 
 def add_weather_controller_to_server(server, repository):
@@ -62,4 +63,15 @@ class WeatherController(weather_pb2_grpc.WeathersServicer):
                                             origin=data.origin))
 
         return weather_pb2.AllOriginTemperatureResponse(allOriginTemperatures=grpc_temperature_at_origins)
+
+    def GetDailyMeanTemperatureAtOrigin(self, request, context):
+        all_temperature_data_at_origin = self.repository.get_temperature_at_origin(request.origin)
+
+        grpc_temperature_data_with_daily_mean = []
+
+        for _, data in get_daily_mean_temperature(all_temperature_data_at_origin).iterrows():
+            grpc_temperature_data_with_daily_mean.append(weather_pb2.DailyMeanTemperature(year=int(data.year), month=int(data.month), day=int(data.day),
+                                               meanTemp=data.mean_temperature))
+
+        return weather_pb2.DailyMeanTemperatureResponse(dailyMeanTemperatures=grpc_temperature_data_with_daily_mean)
 
