@@ -24,7 +24,7 @@ class WeatherController(weather_pb2_grpc.WeathersServicer):
         all_temperature_at_origin = self.repository.get_temperature_at_origin(request.origin)
         grpc_temperature_at_origins = []
         for data in all_temperature_at_origin:
-            grpc_temperature_at_origins.append(weather_pb2.TemperatureAtOrigin(year=data.year, month=data.month, day=data.day, hour=data.hour, temp=data.temp))
+            grpc_temperature_at_origins.append(weather_pb2.TemperatureAtOrigin(year=data.year, month=data.month, day=data.day, hour=data.hour, temp=data.temp, origin=data.origin))
 
         return weather_pb2.TemperatureResponse(temperatureAtOrigins=grpc_temperature_at_origins)
 
@@ -71,7 +71,7 @@ class WeatherController(weather_pb2_grpc.WeathersServicer):
 
         for _, data in get_daily_mean_temperature(all_temperature_data_at_origin).iterrows():
             grpc_temperature_data_with_daily_mean.append(weather_pb2.DailyMeanTemperature(year=int(data.year), month=int(data.month), day=int(data.day),
-                                               meanTemp=data.mean_temperature))
+                                               meanTemp=data.mean_temperature, origin=data.origin))
 
         return weather_pb2.DailyMeanTemperatureResponse(dailyMeanTemperatures=grpc_temperature_data_with_daily_mean)
 
