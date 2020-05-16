@@ -109,6 +109,16 @@ class Repository:
         session.close()
         return airtime_at_origin;
 
+    def get_mean_airtime_at_origins(self, origins):
+        session = Session(self.Engine)
+        airtime_at_origins = session.query(self.Flights.air_time,self.Flights.origin) \
+            .filter(self.Flights.origin.in_(origins))\
+            .group_by(self.Flights.origin,self.Flights.air_time)\
+            .all()
+
+        session.close()
+        return airtime_at_origins
+
     def get_weather_observations_at_origin(self, origin):
         session = Session(self.Engine)
         observations_at_origin = session.query(func.count('*').label('observationsAtOrigin'), self.Weather.origin) \
