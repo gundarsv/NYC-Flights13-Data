@@ -1,5 +1,6 @@
 import Protos.flights_pb2_grpc as flights_pb2_grpc
 import Protos.flights_pb2 as flights_pb2
+import numpy as np
 
 
 def add_flights_controller_to_server(server, repository):
@@ -49,8 +50,14 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
 
     def GetAirtimeAtOrigin(self, request, context):
         all_airtime_at_origin = self.repository.get_airtime_at_origin(request.origin)
-        grpc_airtime_at_origin = []
+        grpc_mean_airtime = []
         for data in all_airtime_at_origin:
-             grpc_airtime_at_origin.append(flights_pb2.AirtimeAtOrigin(air_time=data.air_time))
+            grpc_mean_airtime.append(data[0])
+        print(grpc_mean_airtime)
+        grpc_mean_airtime = np.array(grpc_mean_airtime)
+        print(grpc_mean_airtime.dtype)
+        grpc_mean_airtime = grpc_mean_airtime.astype('int32')
+        print(grpc_mean_airtime)
+        mean_airtime = np.mean(grpc_mean_airtime)
 
-        return flights_pb2.AirtimeResponse(airtimeAtOrigin=grpc_airtime_at_origin)
+        return flights_pb2.AirtimeAtOrigin(air_time=mean_airtime, origin=request.origin)
