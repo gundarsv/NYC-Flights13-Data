@@ -29,8 +29,23 @@ class WeatherController(weather_pb2_grpc.WeathersServicer):
 
     def GetWeatherObservationsAtOrigin(self, request, context):
         all_observations_at_origin = self.repository.get_weather_observations_at_origin(request.origin)
-        return weather_pb2.ObservationsResponse(observationsAtOrigin=all_observations_at_origin.observationsAtOrigin, origin=all_observations_at_origin.origin)
-    
+        return weather_pb2.ObservationResponse(observationsAtOrigin=all_observations_at_origin.observationsAtOrigin, origin=all_observations_at_origin.origin)
+
+    def GetWeatherObservationsAtOrigins(self, request, context):
+        origins = []
+
+        for data in request.origins:
+            origins.append(data.origin)
+
+        observations_at_origins = self.repository.get_weather_observations_at_origins(origins=origins)
+
+        grpc_observations_at_origins = []
+
+        for data in observations_at_origins:
+            grpc_observations_at_origins.append(weather_pb2.ObservationResponse(observationsAtOrigin=data.observationsAtOrigin, origin=data.origin))
+
+        return weather_pb2.ObservationsResponse(observations=grpc_observations_at_origins)
+
     def GetTemperatureAtOrigins(self, request, context):
         origins = []
 

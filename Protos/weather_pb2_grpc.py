@@ -27,6 +27,11 @@ class WeathersStub(object):
         self.GetWeatherObservationsAtOrigin = channel.unary_unary(
                 '/nycflights.Weathers/GetWeatherObservationsAtOrigin',
                 request_serializer=Protos_dot_weather__pb2.OriginRequest.SerializeToString,
+                response_deserializer=Protos_dot_weather__pb2.ObservationResponse.FromString,
+                )
+        self.GetWeatherObservationsAtOrigins = channel.unary_unary(
+                '/nycflights.Weathers/GetWeatherObservationsAtOrigins',
+                request_serializer=Protos_dot_weather__pb2.OriginsRequest.SerializeToString,
                 response_deserializer=Protos_dot_weather__pb2.ObservationsResponse.FromString,
                 )
         self.GetTemperatureAtOrigins = channel.unary_unary(
@@ -57,6 +62,12 @@ class WeathersServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetWeatherObservationsAtOrigins(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetTemperatureAtOrigins(self, request, context):
         """Missing associated documentation comment in .proto file"""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -79,6 +90,11 @@ def add_WeathersServicer_to_server(servicer, server):
             'GetWeatherObservationsAtOrigin': grpc.unary_unary_rpc_method_handler(
                     servicer.GetWeatherObservationsAtOrigin,
                     request_deserializer=Protos_dot_weather__pb2.OriginRequest.FromString,
+                    response_serializer=Protos_dot_weather__pb2.ObservationResponse.SerializeToString,
+            ),
+            'GetWeatherObservationsAtOrigins': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWeatherObservationsAtOrigins,
+                    request_deserializer=Protos_dot_weather__pb2.OriginsRequest.FromString,
                     response_serializer=Protos_dot_weather__pb2.ObservationsResponse.SerializeToString,
             ),
             'GetTemperatureAtOrigins': grpc.unary_unary_rpc_method_handler(
@@ -140,6 +156,22 @@ class Weathers(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Weathers/GetWeatherObservationsAtOrigin',
             Protos_dot_weather__pb2.OriginRequest.SerializeToString,
+            Protos_dot_weather__pb2.ObservationResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetWeatherObservationsAtOrigins(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Weathers/GetWeatherObservationsAtOrigins',
+            Protos_dot_weather__pb2.OriginsRequest.SerializeToString,
             Protos_dot_weather__pb2.ObservationsResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)

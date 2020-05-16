@@ -19,29 +19,29 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='nycflights',
   syntax='proto3',
   serialized_options=b'\252\002\013GrpcWeather',
-  serialized_pb=b'\n\x14Protos/weather.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"D\n\x14ObservationsResponse\x12\x1c\n\x14observationsAtOrigin\x18\x01 \x01(\x05\x12\x0e\n\x06origin\x18\x02 \x01(\t\"\x1f\n\rOriginRequest\x12\x0e\n\x06origin\x18\x01 \x01(\t\"<\n\x0eOriginsRequest\x12*\n\x07origins\x18\x01 \x03(\x0b\x32\x19.nycflights.OriginRequest\"d\n\x14\x41llOriginTemperature\x12<\n\x13temperatureAtOrigin\x18\x01 \x01(\x0b\x32\x1f.nycflights.TemperatureAtOrigin\x12\x0e\n\x06origin\x18\x02 \x01(\t\"_\n\x1c\x41llOriginTemperatureResponse\x12?\n\x15\x61llOriginTemperatures\x18\x01 \x03(\x0b\x32 .nycflights.AllOriginTemperature\"[\n\x13TemperatureAtOrigin\x12\x0c\n\x04year\x18\x01 \x01(\x05\x12\r\n\x05month\x18\x02 \x01(\x05\x12\x0b\n\x03\x64\x61y\x18\x03 \x01(\x05\x12\x0c\n\x04hour\x18\x04 \x01(\x05\x12\x0c\n\x04temp\x18\x05 \x01(\x02\"T\n\x13TemperatureResponse\x12=\n\x14temperatureAtOrigins\x18\x01 \x03(\x0b\x32\x1f.nycflights.TemperatureAtOrigin\"7\n\x0fWeatherResponse\x12$\n\x07weather\x18\x01 \x03(\x0b\x32\x13.nycflights.Weather\"\xf9\x01\n\x07Weather\x12\x0e\n\x06origin\x18\x01 \x01(\t\x12\x0c\n\x04year\x18\x02 \x01(\x05\x12\r\n\x05month\x18\x03 \x01(\x05\x12\x0b\n\x03\x64\x61y\x18\x04 \x01(\x05\x12\x0c\n\x04hour\x18\x05 \x01(\x05\x12\x0c\n\x04temp\x18\x06 \x01(\x02\x12\x0c\n\x04\x64\x65wp\x18\x07 \x01(\x02\x12\r\n\x05humid\x18\x08 \x01(\x02\x12\x10\n\x08wind_dir\x18\t \x01(\x05\x12\x12\n\nwind_speed\x18\n \x01(\x02\x12\x11\n\twind_gust\x18\x0b \x01(\x02\x12\x0e\n\x06precip\x18\x0c \x01(\x02\x12\x10\n\x08pressure\x18\r \x01(\x02\x12\r\n\x05visib\x18\x0e \x01(\x02\x12\x11\n\ttime_hour\x18\x0f \x01(\t2\xe3\x02\n\x08Weathers\x12\x41\n\nGetWeather\x12\x16.google.protobuf.Empty\x1a\x1b.nycflights.WeatherResponse\x12T\n\x16GetTemperatureAtOrigin\x12\x19.nycflights.OriginRequest\x1a\x1f.nycflights.TemperatureResponse\x12]\n\x1eGetWeatherObservationsAtOrigin\x12\x19.nycflights.OriginRequest\x1a .nycflights.ObservationsResponse\x12_\n\x17GetTemperatureAtOrigins\x12\x1a.nycflights.OriginsRequest\x1a(.nycflights.AllOriginTemperatureResponseB\x0e\xaa\x02\x0bGrpcWeatherb\x06proto3'
+  serialized_pb=b'\n\x14Protos/weather.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"C\n\x13ObservationResponse\x12\x1c\n\x14observationsAtOrigin\x18\x01 \x01(\x05\x12\x0e\n\x06origin\x18\x02 \x01(\t\"M\n\x14ObservationsResponse\x12\x35\n\x0cobservations\x18\x01 \x03(\x0b\x32\x1f.nycflights.ObservationResponse\"\x1f\n\rOriginRequest\x12\x0e\n\x06origin\x18\x01 \x01(\t\"<\n\x0eOriginsRequest\x12*\n\x07origins\x18\x01 \x03(\x0b\x32\x19.nycflights.OriginRequest\"d\n\x14\x41llOriginTemperature\x12<\n\x13temperatureAtOrigin\x18\x01 \x01(\x0b\x32\x1f.nycflights.TemperatureAtOrigin\x12\x0e\n\x06origin\x18\x02 \x01(\t\"_\n\x1c\x41llOriginTemperatureResponse\x12?\n\x15\x61llOriginTemperatures\x18\x01 \x03(\x0b\x32 .nycflights.AllOriginTemperature\"[\n\x13TemperatureAtOrigin\x12\x0c\n\x04year\x18\x01 \x01(\x05\x12\r\n\x05month\x18\x02 \x01(\x05\x12\x0b\n\x03\x64\x61y\x18\x03 \x01(\x05\x12\x0c\n\x04hour\x18\x04 \x01(\x05\x12\x0c\n\x04temp\x18\x05 \x01(\x02\"T\n\x13TemperatureResponse\x12=\n\x14temperatureAtOrigins\x18\x01 \x03(\x0b\x32\x1f.nycflights.TemperatureAtOrigin\"7\n\x0fWeatherResponse\x12$\n\x07weather\x18\x01 \x03(\x0b\x32\x13.nycflights.Weather\"\xf9\x01\n\x07Weather\x12\x0e\n\x06origin\x18\x01 \x01(\t\x12\x0c\n\x04year\x18\x02 \x01(\x05\x12\r\n\x05month\x18\x03 \x01(\x05\x12\x0b\n\x03\x64\x61y\x18\x04 \x01(\x05\x12\x0c\n\x04hour\x18\x05 \x01(\x05\x12\x0c\n\x04temp\x18\x06 \x01(\x02\x12\x0c\n\x04\x64\x65wp\x18\x07 \x01(\x02\x12\r\n\x05humid\x18\x08 \x01(\x02\x12\x10\n\x08wind_dir\x18\t \x01(\x05\x12\x12\n\nwind_speed\x18\n \x01(\x02\x12\x11\n\twind_gust\x18\x0b \x01(\x02\x12\x0e\n\x06precip\x18\x0c \x01(\x02\x12\x10\n\x08pressure\x18\r \x01(\x02\x12\r\n\x05visib\x18\x0e \x01(\x02\x12\x11\n\ttime_hour\x18\x0f \x01(\t2\xc3\x03\n\x08Weathers\x12\x41\n\nGetWeather\x12\x16.google.protobuf.Empty\x1a\x1b.nycflights.WeatherResponse\x12T\n\x16GetTemperatureAtOrigin\x12\x19.nycflights.OriginRequest\x1a\x1f.nycflights.TemperatureResponse\x12\\\n\x1eGetWeatherObservationsAtOrigin\x12\x19.nycflights.OriginRequest\x1a\x1f.nycflights.ObservationResponse\x12_\n\x1fGetWeatherObservationsAtOrigins\x12\x1a.nycflights.OriginsRequest\x1a .nycflights.ObservationsResponse\x12_\n\x17GetTemperatureAtOrigins\x12\x1a.nycflights.OriginsRequest\x1a(.nycflights.AllOriginTemperatureResponseB\x0e\xaa\x02\x0bGrpcWeatherb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
 
 
 
-_OBSERVATIONSRESPONSE = _descriptor.Descriptor(
-  name='ObservationsResponse',
-  full_name='nycflights.ObservationsResponse',
+_OBSERVATIONRESPONSE = _descriptor.Descriptor(
+  name='ObservationResponse',
+  full_name='nycflights.ObservationResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='observationsAtOrigin', full_name='nycflights.ObservationsResponse.observationsAtOrigin', index=0,
+      name='observationsAtOrigin', full_name='nycflights.ObservationResponse.observationsAtOrigin', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='origin', full_name='nycflights.ObservationsResponse.origin', index=1,
+      name='origin', full_name='nycflights.ObservationResponse.origin', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -60,7 +60,38 @@ _OBSERVATIONSRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=65,
-  serialized_end=133,
+  serialized_end=132,
+)
+
+
+_OBSERVATIONSRESPONSE = _descriptor.Descriptor(
+  name='ObservationsResponse',
+  full_name='nycflights.ObservationsResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='observations', full_name='nycflights.ObservationsResponse.observations', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=134,
+  serialized_end=211,
 )
 
 
@@ -90,8 +121,8 @@ _ORIGINREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=135,
-  serialized_end=166,
+  serialized_start=213,
+  serialized_end=244,
 )
 
 
@@ -121,8 +152,8 @@ _ORIGINSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=168,
-  serialized_end=228,
+  serialized_start=246,
+  serialized_end=306,
 )
 
 
@@ -159,8 +190,8 @@ _ALLORIGINTEMPERATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=230,
-  serialized_end=330,
+  serialized_start=308,
+  serialized_end=408,
 )
 
 
@@ -190,8 +221,8 @@ _ALLORIGINTEMPERATURERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=332,
-  serialized_end=427,
+  serialized_start=410,
+  serialized_end=505,
 )
 
 
@@ -249,8 +280,8 @@ _TEMPERATUREATORIGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=429,
-  serialized_end=520,
+  serialized_start=507,
+  serialized_end=598,
 )
 
 
@@ -280,8 +311,8 @@ _TEMPERATURERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=522,
-  serialized_end=606,
+  serialized_start=600,
+  serialized_end=684,
 )
 
 
@@ -311,8 +342,8 @@ _WEATHERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=608,
-  serialized_end=663,
+  serialized_start=686,
+  serialized_end=741,
 )
 
 
@@ -440,15 +471,17 @@ _WEATHER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=666,
-  serialized_end=915,
+  serialized_start=744,
+  serialized_end=993,
 )
 
+_OBSERVATIONSRESPONSE.fields_by_name['observations'].message_type = _OBSERVATIONRESPONSE
 _ORIGINSREQUEST.fields_by_name['origins'].message_type = _ORIGINREQUEST
 _ALLORIGINTEMPERATURE.fields_by_name['temperatureAtOrigin'].message_type = _TEMPERATUREATORIGIN
 _ALLORIGINTEMPERATURERESPONSE.fields_by_name['allOriginTemperatures'].message_type = _ALLORIGINTEMPERATURE
 _TEMPERATURERESPONSE.fields_by_name['temperatureAtOrigins'].message_type = _TEMPERATUREATORIGIN
 _WEATHERRESPONSE.fields_by_name['weather'].message_type = _WEATHER
+DESCRIPTOR.message_types_by_name['ObservationResponse'] = _OBSERVATIONRESPONSE
 DESCRIPTOR.message_types_by_name['ObservationsResponse'] = _OBSERVATIONSRESPONSE
 DESCRIPTOR.message_types_by_name['OriginRequest'] = _ORIGINREQUEST
 DESCRIPTOR.message_types_by_name['OriginsRequest'] = _ORIGINSREQUEST
@@ -459,6 +492,13 @@ DESCRIPTOR.message_types_by_name['TemperatureResponse'] = _TEMPERATURERESPONSE
 DESCRIPTOR.message_types_by_name['WeatherResponse'] = _WEATHERRESPONSE
 DESCRIPTOR.message_types_by_name['Weather'] = _WEATHER
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+ObservationResponse = _reflection.GeneratedProtocolMessageType('ObservationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _OBSERVATIONRESPONSE,
+  '__module__' : 'Protos.weather_pb2'
+  # @@protoc_insertion_point(class_scope:nycflights.ObservationResponse)
+  })
+_sym_db.RegisterMessage(ObservationResponse)
 
 ObservationsResponse = _reflection.GeneratedProtocolMessageType('ObservationsResponse', (_message.Message,), {
   'DESCRIPTOR' : _OBSERVATIONSRESPONSE,
@@ -532,8 +572,8 @@ _WEATHERS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=918,
-  serialized_end=1273,
+  serialized_start=996,
+  serialized_end=1447,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetWeather',
@@ -559,13 +599,22 @@ _WEATHERS = _descriptor.ServiceDescriptor(
     index=2,
     containing_service=None,
     input_type=_ORIGINREQUEST,
+    output_type=_OBSERVATIONRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetWeatherObservationsAtOrigins',
+    full_name='nycflights.Weathers.GetWeatherObservationsAtOrigins',
+    index=3,
+    containing_service=None,
+    input_type=_ORIGINSREQUEST,
     output_type=_OBSERVATIONSRESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='GetTemperatureAtOrigins',
     full_name='nycflights.Weathers.GetTemperatureAtOrigins',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_ORIGINSREQUEST,
     output_type=_ALLORIGINTEMPERATURERESPONSE,
