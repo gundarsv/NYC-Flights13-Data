@@ -1,4 +1,4 @@
-syntax = "proto3";
+﻿syntax = "proto3";
 
 option csharp_namespace = "GrpcAirlines";
 
@@ -8,10 +8,6 @@ package nycflights;
 
 service Airlines {
 	rpc GetAirlines (google.protobuf.Empty) returns (AirlineResponse);
-}
-
-message Empty {
-
 }
 
 message AirlineResponse {
