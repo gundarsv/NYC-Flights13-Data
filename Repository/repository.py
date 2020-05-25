@@ -150,5 +150,49 @@ class Repository:
         session.close()
         return temperatures_at_origins
 
+    def get_number_of_flights_per_month_at_origin(self, month_number, origin):
+        session = Session(self.Engine)
+        number_of_flights_at_origin = session.query(func.count('*').label('count'), self.Flights.month.label('month'), self.Flights.origin)\
+            .filter(self.Flights.month == month_number, self.Flights.origin == origin)\
+            .group_by(self.Flights.month, self.Flights.origin).one()
+
+        session.close()
+        return number_of_flights_at_origin
+
+    def get_number_of_flights_per_month_per_origins(self, month_number, origins):
+        session = Session(self.Engine)
+        number_of_flights_per_origins = session.query(func.count('*').label('count'), self.Flights.month.label('month'), self.Flights.origin)\
+            .filter(self.Flights.month == month_number, self.Flights.origin.in_(origins))\
+            .group_by(self.Flights.month, self.Flights.origin) \
+            .order_by(self.Flights.month) \
+            .all()
+
+        session.close()
+        return number_of_flights_per_origins
+
+    def get_number_of_flights_in_months_at_origin(self, month_numbers, origin):
+        session = Session(self.Engine)
+        number_of_flights_at_origin = session.query(func.count('*').label('count'), self.Flights.month.label('month'), self.Flights.origin) \
+            .filter(self.Flights.month.in_(month_numbers)) \
+            .filter(self.Flights.origin == origin) \
+            .group_by(self.Flights.month, self.Flights.origin) \
+            .order_by(self.Flights.month) \
+            .all()
+
+        session.close()
+        return number_of_flights_at_origin
+
+    def get_number_of_flights_in_months_per_origins(self, month_numbers, origins):
+        session = Session(self.Engine)
+        number_of_flights_per_origins = session.query(func.count('*').label('count'), self.Flights.month.label('month'), self.Flights.origin) \
+            .filter(self.Flights.month.in_(month_numbers)) \
+            .filter(self.Flights.origin.in_(origins)) \
+            .group_by(self.Flights.month, self.Flights.origin) \
+            .order_by(self.Flights.month) \
+            .all()
+
+        session.close()
+        return number_of_flights_per_origins
+
     def get_engine(self):
         return self.Engine
