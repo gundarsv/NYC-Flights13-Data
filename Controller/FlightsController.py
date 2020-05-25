@@ -71,3 +71,43 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
 
         return flights_pb2.AirtimeAtOrigins(airtimeAtOrigins=grpc_mean_airtime_at_origins)
 
+    def GetNumberOfFlightsPerMonthInOrigin(self, request, context):
+        number_of_flights_per_month_at_origin = self.repository.get_number_of_flights_per_month_at_origin(request.month, request.origin)
+
+        return flights_pb2.MonthOriginResponse(flights=number_of_flights_per_month_at_origin.count, month=number_of_flights_per_month_at_origin.month, origin=number_of_flights_per_month_at_origin.origin)
+
+    def GetNumberOfFlightsInMonthsInOrigin(self, request, context):
+        number_of_flights_in_months_at_origin = self.repository.get_number_of_flights_in_months_at_origin(request.month, request.origin)
+
+        grpc_number_of_flights_in_months_at_origin = []
+
+        for data in number_of_flights_in_months_at_origin:
+            grpc_number_of_flights_in_months_at_origin.append(
+                flights_pb2.MonthOriginResponse(flights=data.count,
+                                                month=data.month, origin=data.origin))
+
+        return flights_pb2.MonthsOriginsResponse(monthsOrigins=grpc_number_of_flights_in_months_at_origin)
+
+    def GetNumberOfFlightsInMonthsInOrigins(self, request, context):
+        number_of_flights_in_months_at_origin = self.repository.get_number_of_flights_in_months_per_origins(request.month, request.origin)
+
+        grpc_number_of_flights_in_months_at_origin = []
+
+        for data in number_of_flights_in_months_at_origin:
+            grpc_number_of_flights_in_months_at_origin.append(
+                flights_pb2.MonthOriginResponse(flights=data.count,
+                                                month=data.month, origin=data.origin))
+
+        return flights_pb2.MonthsOriginsResponse(monthsOrigins=grpc_number_of_flights_in_months_at_origin)
+
+    def GetNumberOfFlightsPerMonthInOrigins(self, request, context):
+        number_of_flights_in_months_at_origin = self.repository.get_number_of_flights_per_month_per_origins(request.month, request.origin)
+
+        grpc_number_of_flights_in_months_at_origin = []
+
+        for data in number_of_flights_in_months_at_origin:
+            grpc_number_of_flights_in_months_at_origin.append(
+                flights_pb2.MonthOriginResponse(flights=data.count,
+                                                month=data.month, origin=data.origin))
+
+        return flights_pb2.MonthsOriginsResponse(monthsOrigins=grpc_number_of_flights_in_months_at_origin)

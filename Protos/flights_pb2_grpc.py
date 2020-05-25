@@ -44,6 +44,26 @@ class FlightsStub(object):
                 request_serializer=Protos_dot_flights__pb2.AirtimeRequests.SerializeToString,
                 response_deserializer=Protos_dot_flights__pb2.AirtimeAtOrigins.FromString,
                 )
+        self.GetNumberOfFlightsPerMonthInOrigin = channel.unary_unary(
+                '/nycflights.Flights/GetNumberOfFlightsPerMonthInOrigin',
+                request_serializer=Protos_dot_flights__pb2.MonthOriginRequest.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.MonthOriginResponse.FromString,
+                )
+        self.GetNumberOfFlightsPerMonthInOrigins = channel.unary_unary(
+                '/nycflights.Flights/GetNumberOfFlightsPerMonthInOrigins',
+                request_serializer=Protos_dot_flights__pb2.MonthOriginsRequest.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
+                )
+        self.GetNumberOfFlightsInMonthsInOrigin = channel.unary_unary(
+                '/nycflights.Flights/GetNumberOfFlightsInMonthsInOrigin',
+                request_serializer=Protos_dot_flights__pb2.MonthsOriginRequest.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
+                )
+        self.GetNumberOfFlightsInMonthsInOrigins = channel.unary_unary(
+                '/nycflights.Flights/GetNumberOfFlightsInMonthsInOrigins',
+                request_serializer=Protos_dot_flights__pb2.MonthsOriginsRequest.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
+                )
 
 
 class FlightsServicer(object):
@@ -85,6 +105,30 @@ class FlightsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetNumberOfFlightsPerMonthInOrigin(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetNumberOfFlightsPerMonthInOrigins(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetNumberOfFlightsInMonthsInOrigin(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetNumberOfFlightsInMonthsInOrigins(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_FlightsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -117,6 +161,26 @@ def add_FlightsServicer_to_server(servicer, server):
                     servicer.GetAirtimeAtOrigins,
                     request_deserializer=Protos_dot_flights__pb2.AirtimeRequests.FromString,
                     response_serializer=Protos_dot_flights__pb2.AirtimeAtOrigins.SerializeToString,
+            ),
+            'GetNumberOfFlightsPerMonthInOrigin': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNumberOfFlightsPerMonthInOrigin,
+                    request_deserializer=Protos_dot_flights__pb2.MonthOriginRequest.FromString,
+                    response_serializer=Protos_dot_flights__pb2.MonthOriginResponse.SerializeToString,
+            ),
+            'GetNumberOfFlightsPerMonthInOrigins': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNumberOfFlightsPerMonthInOrigins,
+                    request_deserializer=Protos_dot_flights__pb2.MonthOriginsRequest.FromString,
+                    response_serializer=Protos_dot_flights__pb2.MonthsOriginsResponse.SerializeToString,
+            ),
+            'GetNumberOfFlightsInMonthsInOrigin': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNumberOfFlightsInMonthsInOrigin,
+                    request_deserializer=Protos_dot_flights__pb2.MonthsOriginRequest.FromString,
+                    response_serializer=Protos_dot_flights__pb2.MonthsOriginsResponse.SerializeToString,
+            ),
+            'GetNumberOfFlightsInMonthsInOrigins': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNumberOfFlightsInMonthsInOrigins,
+                    request_deserializer=Protos_dot_flights__pb2.MonthsOriginsRequest.FromString,
+                    response_serializer=Protos_dot_flights__pb2.MonthsOriginsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -221,5 +285,69 @@ class Flights(object):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetAirtimeAtOrigins',
             Protos_dot_flights__pb2.AirtimeRequests.SerializeToString,
             Protos_dot_flights__pb2.AirtimeAtOrigins.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNumberOfFlightsPerMonthInOrigin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsPerMonthInOrigin',
+            Protos_dot_flights__pb2.MonthOriginRequest.SerializeToString,
+            Protos_dot_flights__pb2.MonthOriginResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNumberOfFlightsPerMonthInOrigins(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsPerMonthInOrigins',
+            Protos_dot_flights__pb2.MonthOriginsRequest.SerializeToString,
+            Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNumberOfFlightsInMonthsInOrigin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsInMonthsInOrigin',
+            Protos_dot_flights__pb2.MonthsOriginRequest.SerializeToString,
+            Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNumberOfFlightsInMonthsInOrigins(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsInMonthsInOrigins',
+            Protos_dot_flights__pb2.MonthsOriginsRequest.SerializeToString,
+            Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
