@@ -13,3 +13,9 @@ def get_mean_airtime(airtimes):
 def get_flights_per_manufacturer(flights_with_tailnum_and_manufacturer):
     return pd.DataFrame(flights_with_tailnum_and_manufacturer).groupby(['manufacturer'])['count'].sum().reset_index(
         name='numberOfFlights')
+
+
+def get_mean_departure_arrival_delay(departure_arrival_delay):
+    df = pd.DataFrame(departure_arrival_delay)
+    df = df.groupby('origin')[['arr_delay','dep_delay']].mean().reset_index()
+    return df

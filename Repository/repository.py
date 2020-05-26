@@ -215,5 +215,25 @@ class Repository:
         session.close()
         return number_flights_for_manufacturer_with_tailnum
 
+    def get_number_of_planes_for_each_manufacturer_model(self, manufacturer):
+        session = Session(self.Engine)
+        number_of_planes_for_each_manufacturer_model = session.query(func.count('*').label('count'),self.Planes.manufacturer,self.Planes.model)\
+            .filter(self.Planes.manufacturer == manufacturer)\
+            .group_by(self.Planes.model,self.Planes.manufacturer)\
+            .all()
+
+        session.close()
+        return  number_of_planes_for_each_manufacturer_model
+
+    def get_mean_departure_arrival_delay_at_origins(self, origins):
+        session = Session(self.Engine)
+        mean_departure_delay_at_origins = session.query(self.Flights.dep_delay, self.Flights.origin, self.Flights.arr_delay)\
+            .filter(self.Flights.origin.in_(origins))\
+            .group_by(self.Flights.origin, self.Flights.dep_delay, self.Flights.arr_delay)\
+            .all()
+
+        session.close()
+        return mean_departure_delay_at_origins;
+
     def get_engine(self):
         return self.Engine
