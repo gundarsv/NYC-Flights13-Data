@@ -2,6 +2,7 @@
 import grpc
 
 from Protos import flights_pb2 as Protos_dot_flights__pb2
+from Protos import weather_pb2 as Protos_dot_weather__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
@@ -68,6 +69,11 @@ class FlightsStub(object):
                 '/nycflights.Flights/GetNumberOfFlightsForManufacturersWithMoreThan200Planes',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=Protos_dot_flights__pb2.NumberOfFlightsForManufacturerResponse.FromString,
+                )
+        self.GetDepartureArrivalDelayAtOrigin = channel.unary_unary(
+                '/nycflights.Flights/GetDepartureArrivalDelayAtOrigin',
+                request_serializer=Protos_dot_weather__pb2.OriginsRequest.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.DepartureArrivalAtOrigin.FromString,
                 )
 
 
@@ -140,6 +146,12 @@ class FlightsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetDepartureArrivalDelayAtOrigin(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_FlightsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -197,6 +209,11 @@ def add_FlightsServicer_to_server(servicer, server):
                     servicer.GetNumberOfFlightsForManufacturersWithMoreThan200Planes,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=Protos_dot_flights__pb2.NumberOfFlightsForManufacturerResponse.SerializeToString,
+            ),
+            'GetDepartureArrivalDelayAtOrigin': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDepartureArrivalDelayAtOrigin,
+                    request_deserializer=Protos_dot_weather__pb2.OriginsRequest.FromString,
+                    response_serializer=Protos_dot_flights__pb2.DepartureArrivalAtOrigin.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -381,5 +398,21 @@ class Flights(object):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsForManufacturersWithMoreThan200Planes',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             Protos_dot_flights__pb2.NumberOfFlightsForManufacturerResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDepartureArrivalDelayAtOrigin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetDepartureArrivalDelayAtOrigin',
+            Protos_dot_weather__pb2.OriginsRequest.SerializeToString,
+            Protos_dot_flights__pb2.DepartureArrivalAtOrigin.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -1,7 +1,8 @@
 import Protos.flights_pb2_grpc as flights_pb2_grpc
 import Protos.flights_pb2 as flights_pb2
 import pandas as pd
-from Repository.repository_helper import get_mean_airtime, get_flights_per_manufacturer
+from Repository.repository_helper import get_mean_airtime, get_flights_per_manufacturer, get_mean_departure_arrival_delay
+
 
 
 def add_flights_controller_to_server(server, repository):
@@ -42,9 +43,7 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
         grpc_number_of_flights_in_month = []
 
         for data in number_of_flights_in_months:
-            grpc_number_of_flights_in_month.append(
-                flights_pb2.FlightsPerMonth(monthNumber=flights_pb2.MonthNumber(number=data.month),
-                                            flightsCount=data.count))
+            grpc_number_of_flights_in_month.append(flights_pb2.FlightsPerMonth(monthNumber=flights_pb2.MonthNumber(number=data.month), flightsCount=data.count))
 
         return flights_pb2.FlightsInMonths(flightsPerMonth=grpc_number_of_flights_in_month)
 
@@ -53,9 +52,7 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
         grpc_number_of_flights_per_destination_at_origin = []
 
         for data in number_of_flights_per_destination_at_origin:
-            grpc_number_of_flights_per_destination_at_origin.append(
-                flights_pb2.FlightsPerDestination(numberOfFlights=data.numberOfFlights, destination=data.destination,
-                                                  origin=data.origin))
+            grpc_number_of_flights_per_destination_at_origin.append(flights_pb2.FlightsPerDestination(numberOfFlights=data.numberOfFlights, destination=data.destination, origin=data.origin))
 
         return flights_pb2.DestinationResponse(flightsPerDestination=grpc_number_of_flights_per_destination_at_origin)
 
@@ -139,3 +136,27 @@ class FlightsController(flights_pb2_grpc.FlightsServicer):
 
         return flights_pb2.NumberOfFlightsForManufacturerResponse(
             numberOfFlightsManufacturer=grpc_number_of_flights_for_manufacturer)
+
+    def GetDepartureArrivalDelayAtOrigin(self, request, context):
+        origins = []
+
+        for data in request.origins:
+            origins.append(data.origin)
+
+        mean_departure_arrival_at_origins = self.repository.get_mean_departure_arrival_delay_at_origins(origins=origins)
+
+        grpc_mean_departure_arrival_at_origins = []
+
+        for _, data in get_mean_departure_arrival_delay(mean_departure_arrival_at_origins).iterrows():
+            grpc_mean_departure_arrival_at_origins.append(
+                flights_pb2.DepartureArrivalDelay(dep_delay=data.dep_delay,
+                                                  arr_delay=data.arr_delay,
+                                                  origin=data.origin))
+
+        return flights_pb2.DepartureArrivalAtOrigin(departureArrivalDelay=grpc_mean_departure_arrival_at_origins)
+
+
+
+
+
+
