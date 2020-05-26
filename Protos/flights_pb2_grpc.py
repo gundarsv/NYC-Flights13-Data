@@ -64,6 +64,11 @@ class FlightsStub(object):
                 request_serializer=Protos_dot_flights__pb2.MonthsOriginsRequest.SerializeToString,
                 response_deserializer=Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
                 )
+        self.GetNumberOfFlightsForManufacturersWithMoreThan200Planes = channel.unary_unary(
+                '/nycflights.Flights/GetNumberOfFlightsForManufacturersWithMoreThan200Planes',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=Protos_dot_flights__pb2.NumberOfFlightsForManufacturerResponse.FromString,
+                )
 
 
 class FlightsServicer(object):
@@ -129,6 +134,12 @@ class FlightsServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetNumberOfFlightsForManufacturersWithMoreThan200Planes(self, request, context):
+        """Missing associated documentation comment in .proto file"""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_FlightsServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -181,6 +192,11 @@ def add_FlightsServicer_to_server(servicer, server):
                     servicer.GetNumberOfFlightsInMonthsInOrigins,
                     request_deserializer=Protos_dot_flights__pb2.MonthsOriginsRequest.FromString,
                     response_serializer=Protos_dot_flights__pb2.MonthsOriginsResponse.SerializeToString,
+            ),
+            'GetNumberOfFlightsForManufacturersWithMoreThan200Planes': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNumberOfFlightsForManufacturersWithMoreThan200Planes,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=Protos_dot_flights__pb2.NumberOfFlightsForManufacturerResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -349,5 +365,21 @@ class Flights(object):
         return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsInMonthsInOrigins',
             Protos_dot_flights__pb2.MonthsOriginsRequest.SerializeToString,
             Protos_dot_flights__pb2.MonthsOriginsResponse.FromString,
+            options, channel_credentials,
+            call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNumberOfFlightsForManufacturersWithMoreThan200Planes(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nycflights.Flights/GetNumberOfFlightsForManufacturersWithMoreThan200Planes',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            Protos_dot_flights__pb2.NumberOfFlightsForManufacturerResponse.FromString,
             options, channel_credentials,
             call_credentials, compression, wait_for_ready, timeout, metadata)
