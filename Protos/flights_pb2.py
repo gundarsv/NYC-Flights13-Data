@@ -12,6 +12,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from Protos import weather_pb2 as Protos_dot_weather__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -19,9 +20,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='nycflights',
   syntax='proto3',
   serialized_options=b'\252\002\013GrpcFlights',
-  serialized_pb=b'\n\x14Protos/flights.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"$\n\x12\x44\x65stinationRequest\x12\x0e\n\x06origin\x18\x01 \x01(\t\"W\n\x13\x44\x65stinationResponse\x12@\n\x15\x66lightsPerDestination\x18\x01 \x03(\x0b\x32!.nycflights.FlightsPerDestination\"U\n\x15\x46lightsPerDestination\x12\x17\n\x0fnumberOfFlights\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65stination\x18\x02 \x01(\t\x12\x0e\n\x06origin\x18\x03 \x01(\t\"4\n\x0e\x46lightResponse\x12\"\n\x06\x66light\x18\x01 \x03(\x0b\x32\x12.nycflights.Flight\" \n\x0e\x41irtimeRequest\x12\x0e\n\x06origin\x18\x01 \x01(\t\"3\n\x0f\x41irtimeAtOrigin\x12\x10\n\x08\x61ir_time\x18\x01 \x01(\x02\x12\x0e\n\x06origin\x18\x02 \x01(\t\"I\n\x0f\x41irtimeRequests\x12\x36\n\x12\x61llAirtimeRequests\x18\x01 \x03(\x0b\x32\x1a.nycflights.AirtimeRequest\"I\n\x10\x41irtimeAtOrigins\x12\x35\n\x10\x61irtimeAtOrigins\x18\x01 \x03(\x0b\x32\x1b.nycflights.AirtimeAtOrigin\"\x8e\x02\n\x06\x46light\x12\x0e\n\x06origin\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x65st\x18\x02 \x01(\t\x12\x0f\n\x07\x63\x61rrier\x18\x03 \x01(\t\x12\x0f\n\x07tailnum\x18\x04 \x01(\t\x12\x0e\n\x06\x66light\x18\x05 \x01(\x05\x12\x0c\n\x04year\x18\x06 \x01(\x05\x12\r\n\x05month\x18\x07 \x01(\x05\x12\x0b\n\x03\x64\x61y\x18\x08 \x01(\x05\x12\x10\n\x08\x64\x65p_time\x18\t \x01(\x05\x12\x11\n\tdep_delay\x18\n \x01(\x05\x12\x10\n\x08\x61rr_time\x18\x0b \x01(\x05\x12\x11\n\tarr_delay\x18\x0c \x01(\x05\x12\x10\n\x08\x61ir_time\x18\r \x01(\x05\x12\x10\n\x08\x64istance\x18\x0e \x01(\x05\x12\x0c\n\x04hour\x18\x0f \x01(\x05\x12\x0e\n\x06minute\x18\x10 \x01(\x05\"\x1d\n\x0bMonthNumber\x12\x0e\n\x06number\x18\x01 \x01(\x05\":\n\tAllMonths\x12-\n\x0cmonthNumbers\x18\x01 \x03(\x0b\x32\x17.nycflights.MonthNumber\"U\n\x0f\x46lightsPerMonth\x12,\n\x0bmonthNumber\x18\x01 \x01(\x0b\x32\x17.nycflights.MonthNumber\x12\x14\n\x0c\x66lightsCount\x18\x02 \x01(\x05\"G\n\x0f\x46lightsInMonths\x12\x34\n\x0f\x66lightsPerMonth\x18\x01 \x03(\x0b\x32\x1b.nycflights.FlightsPerMonth2\xf4\x03\n\x07\x46lights\x12@\n\nGetFlights\x12\x16.google.protobuf.Empty\x1a\x1a.nycflights.FlightResponse\x12R\n\x1aGetNumberOfFlightsPerMonth\x12\x17.nycflights.MonthNumber\x1a\x1b.nycflights.FlightsPerMonth\x12P\n\x1aGetNumberOfFlightsInMonths\x12\x15.nycflights.AllMonths\x1a\x1b.nycflights.FlightsInMonths\x12`\n\x1dGetTop10DestinationsForOrigin\x12\x1e.nycflights.DestinationRequest\x1a\x1f.nycflights.DestinationResponse\x12M\n\x12GetAirtimeAtOrigin\x12\x1a.nycflights.AirtimeRequest\x1a\x1b.nycflights.AirtimeAtOrigin\x12P\n\x13GetAirtimeAtOrigins\x12\x1b.nycflights.AirtimeRequests\x1a\x1c.nycflights.AirtimeAtOriginsB\x0e\xaa\x02\x0bGrpcFlightsb\x06proto3'
+  serialized_pb=b'\n\x14Protos/flights.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\x1a\x14Protos/weather.proto\"$\n\x12\x44\x65stinationRequest\x12\x0e\n\x06origin\x18\x01 \x01(\t\"W\n\x13\x44\x65stinationResponse\x12@\n\x15\x66lightsPerDestination\x18\x01 \x03(\x0b\x32!.nycflights.FlightsPerDestination\"U\n\x15\x46lightsPerDestination\x12\x17\n\x0fnumberOfFlights\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65stination\x18\x02 \x01(\t\x12\x0e\n\x06origin\x18\x03 \x01(\t\"4\n\x0e\x46lightResponse\x12\"\n\x06\x66light\x18\x01 \x03(\x0b\x32\x12.nycflights.Flight\" \n\x0e\x41irtimeRequest\x12\x0e\n\x06origin\x18\x01 \x01(\t\"3\n\x0f\x41irtimeAtOrigin\x12\x10\n\x08\x61ir_time\x18\x01 \x01(\x02\x12\x0e\n\x06origin\x18\x02 \x01(\t\"I\n\x0f\x41irtimeRequests\x12\x36\n\x12\x61llAirtimeRequests\x18\x01 \x03(\x0b\x32\x1a.nycflights.AirtimeRequest\"I\n\x10\x41irtimeAtOrigins\x12\x35\n\x10\x61irtimeAtOrigins\x18\x01 \x03(\x0b\x32\x1b.nycflights.AirtimeAtOrigin\"\\\n\x18\x44\x65partureArrivalAtOrigin\x12@\n\x15\x64\x65partureArrivalDelay\x18\x01 \x03(\x0b\x32!.nycflights.DepartureArrivalDelay\"M\n\x15\x44\x65partureArrivalDelay\x12\x11\n\tdep_delay\x18\x01 \x01(\x02\x12\x11\n\tarr_delay\x18\x02 \x01(\x02\x12\x0e\n\x06origin\x18\x03 \x01(\t\"\x8e\x02\n\x06\x46light\x12\x0e\n\x06origin\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x65st\x18\x02 \x01(\t\x12\x0f\n\x07\x63\x61rrier\x18\x03 \x01(\t\x12\x0f\n\x07tailnum\x18\x04 \x01(\t\x12\x0e\n\x06\x66light\x18\x05 \x01(\x05\x12\x0c\n\x04year\x18\x06 \x01(\x05\x12\r\n\x05month\x18\x07 \x01(\x05\x12\x0b\n\x03\x64\x61y\x18\x08 \x01(\x05\x12\x10\n\x08\x64\x65p_time\x18\t \x01(\x05\x12\x11\n\tdep_delay\x18\n \x01(\x05\x12\x10\n\x08\x61rr_time\x18\x0b \x01(\x05\x12\x11\n\tarr_delay\x18\x0c \x01(\x05\x12\x10\n\x08\x61ir_time\x18\r \x01(\x05\x12\x10\n\x08\x64istance\x18\x0e \x01(\x05\x12\x0c\n\x04hour\x18\x0f \x01(\x05\x12\x0e\n\x06minute\x18\x10 \x01(\x05\"\x1d\n\x0bMonthNumber\x12\x0e\n\x06number\x18\x01 \x01(\x05\":\n\tAllMonths\x12-\n\x0cmonthNumbers\x18\x01 \x03(\x0b\x32\x17.nycflights.MonthNumber\"U\n\x0f\x46lightsPerMonth\x12,\n\x0bmonthNumber\x18\x01 \x01(\x0b\x32\x17.nycflights.MonthNumber\x12\x14\n\x0c\x66lightsCount\x18\x02 \x01(\x05\"G\n\x0f\x46lightsInMonths\x12\x34\n\x0f\x66lightsPerMonth\x18\x01 \x03(\x0b\x32\x1b.nycflights.FlightsPerMonth2\xda\x04\n\x07\x46lights\x12@\n\nGetFlights\x12\x16.google.protobuf.Empty\x1a\x1a.nycflights.FlightResponse\x12R\n\x1aGetNumberOfFlightsPerMonth\x12\x17.nycflights.MonthNumber\x1a\x1b.nycflights.FlightsPerMonth\x12P\n\x1aGetNumberOfFlightsInMonths\x12\x15.nycflights.AllMonths\x1a\x1b.nycflights.FlightsInMonths\x12`\n\x1dGetTop10DestinationsForOrigin\x12\x1e.nycflights.DestinationRequest\x1a\x1f.nycflights.DestinationResponse\x12M\n\x12GetAirtimeAtOrigin\x12\x1a.nycflights.AirtimeRequest\x1a\x1b.nycflights.AirtimeAtOrigin\x12P\n\x13GetAirtimeAtOrigins\x12\x1b.nycflights.AirtimeRequests\x1a\x1c.nycflights.AirtimeAtOrigins\x12\x64\n GetDepartureArrivalDelayAtOrigin\x12\x1a.nycflights.OriginsRequest\x1a$.nycflights.DepartureArrivalAtOriginB\x0e\xaa\x02\x0bGrpcFlightsb\x06proto3'
   ,
-  dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,Protos_dot_weather__pb2.DESCRIPTOR,])
 
 
 
@@ -52,8 +53,8 @@ _DESTINATIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=65,
-  serialized_end=101,
+  serialized_start=87,
+  serialized_end=123,
 )
 
 
@@ -83,8 +84,8 @@ _DESTINATIONRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=103,
-  serialized_end=190,
+  serialized_start=125,
+  serialized_end=212,
 )
 
 
@@ -128,8 +129,8 @@ _FLIGHTSPERDESTINATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=192,
-  serialized_end=277,
+  serialized_start=214,
+  serialized_end=299,
 )
 
 
@@ -159,8 +160,8 @@ _FLIGHTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=279,
-  serialized_end=331,
+  serialized_start=301,
+  serialized_end=353,
 )
 
 
@@ -190,8 +191,8 @@ _AIRTIMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=333,
-  serialized_end=365,
+  serialized_start=355,
+  serialized_end=387,
 )
 
 
@@ -228,8 +229,8 @@ _AIRTIMEATORIGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=367,
-  serialized_end=418,
+  serialized_start=389,
+  serialized_end=440,
 )
 
 
@@ -259,8 +260,8 @@ _AIRTIMEREQUESTS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=420,
-  serialized_end=493,
+  serialized_start=442,
+  serialized_end=515,
 )
 
 
@@ -290,8 +291,84 @@ _AIRTIMEATORIGINS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=495,
-  serialized_end=568,
+  serialized_start=517,
+  serialized_end=590,
+)
+
+
+_DEPARTUREARRIVALATORIGIN = _descriptor.Descriptor(
+  name='DepartureArrivalAtOrigin',
+  full_name='nycflights.DepartureArrivalAtOrigin',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='departureArrivalDelay', full_name='nycflights.DepartureArrivalAtOrigin.departureArrivalDelay', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=592,
+  serialized_end=684,
+)
+
+
+_DEPARTUREARRIVALDELAY = _descriptor.Descriptor(
+  name='DepartureArrivalDelay',
+  full_name='nycflights.DepartureArrivalDelay',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dep_delay', full_name='nycflights.DepartureArrivalDelay.dep_delay', index=0,
+      number=1, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='arr_delay', full_name='nycflights.DepartureArrivalDelay.arr_delay', index=1,
+      number=2, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='origin', full_name='nycflights.DepartureArrivalDelay.origin', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=686,
+  serialized_end=763,
 )
 
 
@@ -426,8 +503,8 @@ _FLIGHT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=571,
-  serialized_end=841,
+  serialized_start=766,
+  serialized_end=1036,
 )
 
 
@@ -457,8 +534,8 @@ _MONTHNUMBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=843,
-  serialized_end=872,
+  serialized_start=1038,
+  serialized_end=1067,
 )
 
 
@@ -488,8 +565,8 @@ _ALLMONTHS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=874,
-  serialized_end=932,
+  serialized_start=1069,
+  serialized_end=1127,
 )
 
 
@@ -526,8 +603,8 @@ _FLIGHTSPERMONTH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=934,
-  serialized_end=1019,
+  serialized_start=1129,
+  serialized_end=1214,
 )
 
 
@@ -557,14 +634,15 @@ _FLIGHTSINMONTHS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1021,
-  serialized_end=1092,
+  serialized_start=1216,
+  serialized_end=1287,
 )
 
 _DESTINATIONRESPONSE.fields_by_name['flightsPerDestination'].message_type = _FLIGHTSPERDESTINATION
 _FLIGHTRESPONSE.fields_by_name['flight'].message_type = _FLIGHT
 _AIRTIMEREQUESTS.fields_by_name['allAirtimeRequests'].message_type = _AIRTIMEREQUEST
 _AIRTIMEATORIGINS.fields_by_name['airtimeAtOrigins'].message_type = _AIRTIMEATORIGIN
+_DEPARTUREARRIVALATORIGIN.fields_by_name['departureArrivalDelay'].message_type = _DEPARTUREARRIVALDELAY
 _ALLMONTHS.fields_by_name['monthNumbers'].message_type = _MONTHNUMBER
 _FLIGHTSPERMONTH.fields_by_name['monthNumber'].message_type = _MONTHNUMBER
 _FLIGHTSINMONTHS.fields_by_name['flightsPerMonth'].message_type = _FLIGHTSPERMONTH
@@ -576,6 +654,8 @@ DESCRIPTOR.message_types_by_name['AirtimeRequest'] = _AIRTIMEREQUEST
 DESCRIPTOR.message_types_by_name['AirtimeAtOrigin'] = _AIRTIMEATORIGIN
 DESCRIPTOR.message_types_by_name['AirtimeRequests'] = _AIRTIMEREQUESTS
 DESCRIPTOR.message_types_by_name['AirtimeAtOrigins'] = _AIRTIMEATORIGINS
+DESCRIPTOR.message_types_by_name['DepartureArrivalAtOrigin'] = _DEPARTUREARRIVALATORIGIN
+DESCRIPTOR.message_types_by_name['DepartureArrivalDelay'] = _DEPARTUREARRIVALDELAY
 DESCRIPTOR.message_types_by_name['Flight'] = _FLIGHT
 DESCRIPTOR.message_types_by_name['MonthNumber'] = _MONTHNUMBER
 DESCRIPTOR.message_types_by_name['AllMonths'] = _ALLMONTHS
@@ -639,6 +719,20 @@ AirtimeAtOrigins = _reflection.GeneratedProtocolMessageType('AirtimeAtOrigins', 
   })
 _sym_db.RegisterMessage(AirtimeAtOrigins)
 
+DepartureArrivalAtOrigin = _reflection.GeneratedProtocolMessageType('DepartureArrivalAtOrigin', (_message.Message,), {
+  'DESCRIPTOR' : _DEPARTUREARRIVALATORIGIN,
+  '__module__' : 'Protos.flights_pb2'
+  # @@protoc_insertion_point(class_scope:nycflights.DepartureArrivalAtOrigin)
+  })
+_sym_db.RegisterMessage(DepartureArrivalAtOrigin)
+
+DepartureArrivalDelay = _reflection.GeneratedProtocolMessageType('DepartureArrivalDelay', (_message.Message,), {
+  'DESCRIPTOR' : _DEPARTUREARRIVALDELAY,
+  '__module__' : 'Protos.flights_pb2'
+  # @@protoc_insertion_point(class_scope:nycflights.DepartureArrivalDelay)
+  })
+_sym_db.RegisterMessage(DepartureArrivalDelay)
+
 Flight = _reflection.GeneratedProtocolMessageType('Flight', (_message.Message,), {
   'DESCRIPTOR' : _FLIGHT,
   '__module__' : 'Protos.flights_pb2'
@@ -683,8 +777,8 @@ _FLIGHTS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1095,
-  serialized_end=1595,
+  serialized_start=1290,
+  serialized_end=1892,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetFlights',
@@ -738,6 +832,15 @@ _FLIGHTS = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_AIRTIMEREQUESTS,
     output_type=_AIRTIMEATORIGINS,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetDepartureArrivalDelayAtOrigin',
+    full_name='nycflights.Flights.GetDepartureArrivalDelayAtOrigin',
+    index=6,
+    containing_service=None,
+    input_type=Protos_dot_weather__pb2._ORIGINSREQUEST,
+    output_type=_DEPARTUREARRIVALATORIGIN,
     serialized_options=None,
   ),
 ])
