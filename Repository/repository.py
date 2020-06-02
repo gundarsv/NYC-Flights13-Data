@@ -3,7 +3,6 @@ from sqlalchemy import create_engine, func
 from sqlalchemy.orm import Session
 
 
-
 class Repository:
     Base = automap_base()
     Airlines = None
@@ -54,8 +53,8 @@ class Repository:
 
     def get_number_of_flights_per_month(self, month_number):
         session = Session(self.Engine)
-        number_of_flights = session.query(func.count('*').label('count'), self.Flights.month.label('month'))\
-            .filter(self.Flights.month == month_number)\
+        number_of_flights = session.query(func.count('*').label('count'), self.Flights.month.label('month')) \
+            .filter(self.Flights.month == month_number) \
             .group_by(self.Flights.month).one()
 
         session.close()
@@ -63,8 +62,8 @@ class Repository:
 
     def get_number_of_flights_in_months(self, month_numbers):
         session = Session(self.Engine)
-        number_of_flights = session.query(func.count('*').label('count'), self.Flights.month.label('month'))\
-            .filter(self.Flights.month.in_(month_numbers))\
+        number_of_flights = session.query(func.count('*').label('count'), self.Flights.month.label('month')) \
+            .filter(self.Flights.month.in_(month_numbers)) \
             .group_by(self.Flights.month).all()
 
         session.close()
@@ -72,17 +71,19 @@ class Repository:
 
     def get_manufacturers_with_more_than_200_planes(self):
         session = Session(self.Engine)
-        manufacturers_with_more_than_200_planes = session.query(func.count('*').label('planesTotal'), self.Planes.manufacturer.label('manufacturer'))\
-            .having(func.count('*') >= 200)\
+        manufacturers_with_more_than_200_planes = session.query(func.count('*').label('planesTotal'),
+                                                                self.Planes.manufacturer.label('manufacturer')) \
+            .having(func.count('*') >= 200) \
             .group_by(self.Planes.manufacturer).all()
 
         session.close()
-        return manufacturers_with_more_than_200_planes;
+        return manufacturers_with_more_than_200_planes
 
     def get_temperature_at_origin(self, origin):
         session = Session(self.Engine)
-        temperatures_at_origin = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp, self.Weather.origin)\
-            .filter(self.Weather.origin == origin)\
+        temperatures_at_origin = session.query(self.Weather.year, self.Weather.month, self.Weather.day,
+                                               self.Weather.hour, self.Weather.temp, self.Weather.origin) \
+            .filter(self.Weather.origin == origin) \
             .all()
 
         session.close()
@@ -90,11 +91,12 @@ class Repository:
 
     def get_top_10_destinations_for_origin(self, origin):
         session = Session(self.Engine)
-        top_10_destinations_for_origin = session.query(func.count('*').label('numberOfFlights'), self.Flights.dest.label('destination'), self.Flights.origin)\
-            .filter(self.Flights.origin == origin)\
-            .group_by(self.Flights.dest, self.Flights.origin)\
-            .order_by(func.count('*').desc())\
-            .limit(10)\
+        top_10_destinations_for_origin = session.query(func.count('*').label('numberOfFlights'),
+                                                       self.Flights.dest.label('destination'), self.Flights.origin) \
+            .filter(self.Flights.origin == origin) \
+            .group_by(self.Flights.dest, self.Flights.origin) \
+            .order_by(func.count('*').desc()) \
+            .limit(10) \
             .all()
 
         session.close()
@@ -102,18 +104,18 @@ class Repository:
 
     def get_airtime_at_origin(self, origin):
         session = Session(self.Engine)
-        airtime_at_origin = session.query(self.Flights.air_time)\
-            .filter(self.Flights.origin == origin)\
+        airtime_at_origin = session.query(self.Flights.air_time) \
+            .filter(self.Flights.origin == origin) \
             .all()
 
         session.close()
-        return airtime_at_origin;
+        return airtime_at_origin
 
     def get_mean_airtime_at_origins(self, origins):
         session = Session(self.Engine)
-        airtime_at_origins = session.query(self.Flights.air_time,self.Flights.origin) \
-            .filter(self.Flights.origin.in_(origins))\
-            .group_by(self.Flights.origin,self.Flights.air_time)\
+        airtime_at_origins = session.query(self.Flights.air_time, self.Flights.origin) \
+            .filter(self.Flights.origin.in_(origins)) \
+            .group_by(self.Flights.origin, self.Flights.air_time) \
             .all()
 
         session.close()
@@ -123,7 +125,7 @@ class Repository:
         session = Session(self.Engine)
         observations_at_origin = session.query(func.count('*').label('observationsAtOrigin'), self.Weather.origin) \
             .filter(self.Weather.origin == origin) \
-            .group_by(self.Weather.origin)\
+            .group_by(self.Weather.origin) \
             .one()
 
         session.close()
@@ -141,14 +143,97 @@ class Repository:
 
     def get_temperature_at_origins(self, origins):
         session = Session(self.Engine)
-        temperatures_at_origins = session.query(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour, self.Weather.temp, self.Weather.origin)\
-            .filter(self.Weather.origin.in_(origins))\
-            .group_by(self.Weather.origin, self.Weather.temp, self.Weather.day, self.Weather.month, self.Weather.year,self.Weather.hour, self.Weather.origin)\
-            .order_by(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour)\
+        temperatures_at_origins = session.query(self.Weather.year, self.Weather.month, self.Weather.day,
+                                                self.Weather.hour, self.Weather.temp, self.Weather.origin) \
+            .filter(self.Weather.origin.in_(origins)) \
+            .group_by(self.Weather.origin, self.Weather.temp, self.Weather.day, self.Weather.month, self.Weather.year,
+                      self.Weather.hour, self.Weather.origin) \
+            .order_by(self.Weather.year, self.Weather.month, self.Weather.day, self.Weather.hour) \
             .all()
 
         session.close()
         return temperatures_at_origins
+
+    def get_number_of_flights_per_month_at_origin(self, month_number, origin):
+        session = Session(self.Engine)
+        number_of_flights_at_origin = session.query(func.count('*').label('count'), self.Flights.month.label('month'),
+                                                    self.Flights.origin) \
+            .filter(self.Flights.month == month_number, self.Flights.origin == origin) \
+            .group_by(self.Flights.month, self.Flights.origin).one()
+
+        session.close()
+        return number_of_flights_at_origin
+
+    def get_number_of_flights_per_month_per_origins(self, month_number, origins):
+        session = Session(self.Engine)
+        number_of_flights_per_origins = session.query(func.count('*').label('count'), self.Flights.month.label('month'),
+                                                      self.Flights.origin) \
+            .filter(self.Flights.month == month_number, self.Flights.origin.in_(origins)) \
+            .group_by(self.Flights.month, self.Flights.origin) \
+            .order_by(self.Flights.month) \
+            .all()
+
+        session.close()
+        return number_of_flights_per_origins
+
+    def get_number_of_flights_in_months_at_origin(self, month_numbers, origin):
+        session = Session(self.Engine)
+        number_of_flights_at_origin = session.query(func.count('*').label('count'), self.Flights.month.label('month'),
+                                                    self.Flights.origin) \
+            .filter(self.Flights.month.in_(month_numbers)) \
+            .filter(self.Flights.origin == origin) \
+            .group_by(self.Flights.month, self.Flights.origin) \
+            .order_by(self.Flights.month) \
+            .all()
+
+        session.close()
+        return number_of_flights_at_origin
+
+    def get_number_of_flights_in_months_per_origins(self, month_numbers, origins):
+        session = Session(self.Engine)
+        number_of_flights_per_origins = session.query(func.count('*').label('count'), self.Flights.month.label('month'),
+                                                      self.Flights.origin) \
+            .filter(self.Flights.month.in_(month_numbers)) \
+            .filter(self.Flights.origin.in_(origins)) \
+            .group_by(self.Flights.month, self.Flights.origin) \
+            .order_by(self.Flights.month) \
+            .all()
+
+        session.close()
+        return number_of_flights_per_origins
+
+    def get_number_of_flights_for_manufacturer(self):
+        session = Session(self.Engine)
+        number_flights_for_manufacturer_with_tailnum = session.query(func.count('*').label('count'),
+                                                                     self.Planes.tailnum, self.Planes.manufacturer) \
+            .select_from(self.Flights) \
+            .join(self.Planes, self.Flights.tailnum == self.Planes.tailnum) \
+            .group_by(self.Planes.tailnum, self.Planes.manufacturer) \
+            .having(func.count('*') >= 200) \
+            .all()
+
+        session.close()
+        return number_flights_for_manufacturer_with_tailnum
+
+    def get_number_of_planes_for_each_manufacturer_model(self, manufacturer):
+        session = Session(self.Engine)
+        number_of_planes_for_each_manufacturer_model = session.query(func.count('*').label('count'),self.Planes.manufacturer,self.Planes.model)\
+            .filter(self.Planes.manufacturer == manufacturer)\
+            .group_by(self.Planes.model,self.Planes.manufacturer)\
+            .all()
+
+        session.close()
+        return  number_of_planes_for_each_manufacturer_model
+
+    def get_mean_departure_arrival_delay_at_origins(self, origins):
+        session = Session(self.Engine)
+        mean_departure_delay_at_origins = session.query(self.Flights.dep_delay, self.Flights.origin, self.Flights.arr_delay)\
+            .filter(self.Flights.origin.in_(origins))\
+            .group_by(self.Flights.origin, self.Flights.dep_delay, self.Flights.arr_delay)\
+            .all()
+
+        session.close()
+        return mean_departure_delay_at_origins;
 
     def get_engine(self):
         return self.Engine

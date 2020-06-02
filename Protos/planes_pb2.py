@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='nycflights',
   syntax='proto3',
   serialized_options=b'\252\002\nGrpcPlanes',
-  serialized_pb=b'\n\x13Protos/planes.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"2\n\rPlaneResponse\x12!\n\x06planes\x18\x01 \x03(\x0b\x32\x11.nycflights.Plane\"\x98\x01\n\x05Plane\x12\x0f\n\x07tailnum\x18\x01 \x01(\t\x12\x0c\n\x04year\x18\x02 \x01(\x05\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x14\n\x0cmanufacturer\x18\x04 \x01(\t\x12\r\n\x05model\x18\x05 \x01(\t\x12\x0f\n\x07\x65ngines\x18\x06 \x01(\x05\x12\r\n\x05seats\x18\x07 \x01(\x05\x12\r\n\x05speed\x18\x08 \x01(\x05\x12\x0e\n\x06\x65ngine\x18\t \x01(\t\"H\n\x15ManufacturersResponse\x12/\n\rmanufacturers\x18\x01 \x03(\x0b\x32\x18.nycflights.Manufacturer\"4\n\x0cManufacturer\x12\x0e\n\x06planes\x18\x01 \x01(\x05\x12\x14\n\x0cmanufacturer\x18\x02 \x01(\t2\xac\x01\n\x06Planes\x12>\n\tGetPlanes\x12\x16.google.protobuf.Empty\x1a\x19.nycflights.PlaneResponse\x12\x62\n%GetManufacturersWithMoreThan200Planes\x12\x16.google.protobuf.Empty\x1a!.nycflights.ManufacturersResponseB\r\xaa\x02\nGrpcPlanesb\x06proto3'
+  serialized_pb=b'\n\x13Protos/planes.proto\x12\nnycflights\x1a\x1bgoogle/protobuf/empty.proto\"2\n\rPlaneResponse\x12!\n\x06planes\x18\x01 \x03(\x0b\x32\x11.nycflights.Plane\"\x98\x01\n\x05Plane\x12\x0f\n\x07tailnum\x18\x01 \x01(\t\x12\x0c\n\x04year\x18\x02 \x01(\x05\x12\x0c\n\x04type\x18\x03 \x01(\t\x12\x14\n\x0cmanufacturer\x18\x04 \x01(\t\x12\r\n\x05model\x18\x05 \x01(\t\x12\x0f\n\x07\x65ngines\x18\x06 \x01(\x05\x12\r\n\x05seats\x18\x07 \x01(\x05\x12\r\n\x05speed\x18\x08 \x01(\x05\x12\x0e\n\x06\x65ngine\x18\t \x01(\t\"H\n\x15ManufacturersResponse\x12/\n\rmanufacturers\x18\x01 \x03(\x0b\x32\x18.nycflights.Manufacturer\"4\n\x0cManufacturer\x12\x0e\n\x06planes\x18\x01 \x01(\x05\x12\x14\n\x0cmanufacturer\x18\x02 \x01(\t\"\x1d\n\x0bModelNumber\x12\x0e\n\x06number\x18\x01 \x01(\t\"p\n\x16NumberOfPlanesForModel\x12,\n\x0bmodelNumber\x18\x01 \x01(\x0b\x32\x17.nycflights.ModelNumber\x12\x12\n\nmodelCount\x18\x02 \x01(\x05\x12\x14\n\x0cmanufacturer\x18\x03 \x01(\t\"d\n\x1eNumberOfPlanesForModelResponse\x12\x42\n\x16numberOfPlanesForModel\x18\x01 \x03(\x0b\x32\".nycflights.NumberOfPlanesForModel2\x9f\x02\n\x06Planes\x12>\n\tGetPlanes\x12\x16.google.protobuf.Empty\x1a\x19.nycflights.PlaneResponse\x12\x62\n%GetManufacturersWithMoreThan200Planes\x12\x16.google.protobuf.Empty\x1a!.nycflights.ManufacturersResponse\x12q\n)GetNumberOfPlanesForEachManufacturerModel\x12\x18.nycflights.Manufacturer\x1a*.nycflights.NumberOfPlanesForModelResponseB\r\xaa\x02\nGrpcPlanesb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,])
 
@@ -212,12 +212,124 @@ _MANUFACTURER = _descriptor.Descriptor(
   serialized_end=397,
 )
 
+
+_MODELNUMBER = _descriptor.Descriptor(
+  name='ModelNumber',
+  full_name='nycflights.ModelNumber',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='number', full_name='nycflights.ModelNumber.number', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=399,
+  serialized_end=428,
+)
+
+
+_NUMBEROFPLANESFORMODEL = _descriptor.Descriptor(
+  name='NumberOfPlanesForModel',
+  full_name='nycflights.NumberOfPlanesForModel',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='modelNumber', full_name='nycflights.NumberOfPlanesForModel.modelNumber', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='modelCount', full_name='nycflights.NumberOfPlanesForModel.modelCount', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='manufacturer', full_name='nycflights.NumberOfPlanesForModel.manufacturer', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=430,
+  serialized_end=542,
+)
+
+
+_NUMBEROFPLANESFORMODELRESPONSE = _descriptor.Descriptor(
+  name='NumberOfPlanesForModelResponse',
+  full_name='nycflights.NumberOfPlanesForModelResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='numberOfPlanesForModel', full_name='nycflights.NumberOfPlanesForModelResponse.numberOfPlanesForModel', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=544,
+  serialized_end=644,
+)
+
 _PLANERESPONSE.fields_by_name['planes'].message_type = _PLANE
 _MANUFACTURERSRESPONSE.fields_by_name['manufacturers'].message_type = _MANUFACTURER
+_NUMBEROFPLANESFORMODEL.fields_by_name['modelNumber'].message_type = _MODELNUMBER
+_NUMBEROFPLANESFORMODELRESPONSE.fields_by_name['numberOfPlanesForModel'].message_type = _NUMBEROFPLANESFORMODEL
 DESCRIPTOR.message_types_by_name['PlaneResponse'] = _PLANERESPONSE
 DESCRIPTOR.message_types_by_name['Plane'] = _PLANE
 DESCRIPTOR.message_types_by_name['ManufacturersResponse'] = _MANUFACTURERSRESPONSE
 DESCRIPTOR.message_types_by_name['Manufacturer'] = _MANUFACTURER
+DESCRIPTOR.message_types_by_name['ModelNumber'] = _MODELNUMBER
+DESCRIPTOR.message_types_by_name['NumberOfPlanesForModel'] = _NUMBEROFPLANESFORMODEL
+DESCRIPTOR.message_types_by_name['NumberOfPlanesForModelResponse'] = _NUMBEROFPLANESFORMODELRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 PlaneResponse = _reflection.GeneratedProtocolMessageType('PlaneResponse', (_message.Message,), {
@@ -248,6 +360,27 @@ Manufacturer = _reflection.GeneratedProtocolMessageType('Manufacturer', (_messag
   })
 _sym_db.RegisterMessage(Manufacturer)
 
+ModelNumber = _reflection.GeneratedProtocolMessageType('ModelNumber', (_message.Message,), {
+  'DESCRIPTOR' : _MODELNUMBER,
+  '__module__' : 'Protos.planes_pb2'
+  # @@protoc_insertion_point(class_scope:nycflights.ModelNumber)
+  })
+_sym_db.RegisterMessage(ModelNumber)
+
+NumberOfPlanesForModel = _reflection.GeneratedProtocolMessageType('NumberOfPlanesForModel', (_message.Message,), {
+  'DESCRIPTOR' : _NUMBEROFPLANESFORMODEL,
+  '__module__' : 'Protos.planes_pb2'
+  # @@protoc_insertion_point(class_scope:nycflights.NumberOfPlanesForModel)
+  })
+_sym_db.RegisterMessage(NumberOfPlanesForModel)
+
+NumberOfPlanesForModelResponse = _reflection.GeneratedProtocolMessageType('NumberOfPlanesForModelResponse', (_message.Message,), {
+  'DESCRIPTOR' : _NUMBEROFPLANESFORMODELRESPONSE,
+  '__module__' : 'Protos.planes_pb2'
+  # @@protoc_insertion_point(class_scope:nycflights.NumberOfPlanesForModelResponse)
+  })
+_sym_db.RegisterMessage(NumberOfPlanesForModelResponse)
+
 
 DESCRIPTOR._options = None
 
@@ -257,8 +390,8 @@ _PLANES = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=400,
-  serialized_end=572,
+  serialized_start=647,
+  serialized_end=934,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetPlanes',
@@ -276,6 +409,15 @@ _PLANES = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=google_dot_protobuf_dot_empty__pb2._EMPTY,
     output_type=_MANUFACTURERSRESPONSE,
+    serialized_options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetNumberOfPlanesForEachManufacturerModel',
+    full_name='nycflights.Planes.GetNumberOfPlanesForEachManufacturerModel',
+    index=2,
+    containing_service=None,
+    input_type=_MANUFACTURER,
+    output_type=_NUMBEROFPLANESFORMODELRESPONSE,
     serialized_options=None,
   ),
 ])

@@ -29,3 +29,13 @@ class PlanesController(planes_pb2_grpc.PlanesServicer):
             grpc_manufacturers_with_more_than_200_planes.append(planes_pb2.Manufacturer(planes=data.planesTotal, manufacturer=data.manufacturer))
 
         return planes_pb2.ManufacturersResponse(manufacturers=grpc_manufacturers_with_more_than_200_planes)
+
+    def GetNumberOfPlanesForEachManufacturerModel(self, request, context):
+        number_of_planes_for_each_manufacturer_model = self.repository.get_number_of_planes_for_each_manufacturer_model(request.manufacturer)
+        print(number_of_planes_for_each_manufacturer_model)
+        grpc_number_of_planes_for_each_manufacturer_model = []
+
+        for data in number_of_planes_for_each_manufacturer_model:
+            grpc_number_of_planes_for_each_manufacturer_model.append(planes_pb2.NumberOfPlanesForModel(modelNumber=planes_pb2.ModelNumber(number=data.model),modelCount=data.count, manufacturer=data.manufacturer))
+
+        return planes_pb2.NumberOfPlanesForModelResponse(numberOfPlanesForModel = grpc_number_of_planes_for_each_manufacturer_model)
